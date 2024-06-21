@@ -4,7 +4,8 @@ import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_widget
 import 'package:ui_playground_134/utils/github_link.dart';
 
 class StripeAnimationExample extends StatefulWidget {
-  const StripeAnimationExample({super.key});
+  final String githubUrl;
+  const StripeAnimationExample({super.key, required this.githubUrl});
 
   @override
   State<StripeAnimationExample> createState() => _StripeAnimationExampleState();
@@ -13,8 +14,6 @@ class StripeAnimationExample extends StatefulWidget {
 class _StripeAnimationExampleState extends State<StripeAnimationExample>
     with SingleTickerProviderStateMixin {
   final PageController _pageController = PageController();
-  static const _githubUrl =
-      'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart';
 
   int _tabNumber = 0;
 
@@ -34,7 +33,7 @@ class _StripeAnimationExampleState extends State<StripeAnimationExample>
           IconButton(
               icon: const FaIcon(FontAwesomeIcons.github),
               onPressed: () async {
-                await GithubLink.openGithubLink(_githubUrl);
+                await GithubLink.openGithubLink(widget.githubUrl);
               })
         ],
       ),

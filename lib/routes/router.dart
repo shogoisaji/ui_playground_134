@@ -6,7 +6,11 @@ import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_exampl
 List<Map<String, dynamic>> pages = [
   {
     'name': 'stripe_animation',
-    'page': const StripeAnimationExample(),
+    'page': const StripeAnimationExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart',
+    ),
+    'date': '2024.6.21',
   },
 ];
 
@@ -72,7 +76,8 @@ class ListPage extends StatelessWidget {
                     color: Colors.pink[200],
                     child: InkWell(
                       onTap: () {
-                        context.go('/${pages[index]['name']}');
+                        context.go('/${pages[index]['name']}',
+                            extra: pages[index]['github']);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -86,6 +91,17 @@ class ListPage extends StatelessWidget {
                                     color: Colors.grey[800],
                                     fontSize: w > breakpoint ? 24 : 20,
                                     fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                '${pages[index]['date']}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 14,
+                                ),
                               ),
                             ),
                             Expanded(
