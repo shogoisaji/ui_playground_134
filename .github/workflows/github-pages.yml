@@ -15,9 +15,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create .nojekyll file
-        run: touch ./build/web/.nojekyll
-
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -26,7 +23,10 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --web-renderer html --base-href /ui_playground_134/
+      - run: flutter build web --web-renderer html --base-href /
+
+      - name: Create .nojekyll file
+        run: touch ./build/web/.nojekyll
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
