@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
+import 'package:ui_playground_134/strings.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
@@ -10,7 +11,7 @@ List<Map<String, dynamic>> pages = [
       githubUrl:
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart',
     ),
-    'date': '2024.6.21',
+    'date': DateTime(2024, 6, 21),
   },
 ];
 
@@ -96,7 +97,9 @@ class ListPage extends StatelessWidget {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                '${pages[index]['date']}',
+                                (pages[index]['date'] as DateTime)
+                                    .toIso8601String()
+                                    .toYMDString(),
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Colors.grey[800],
