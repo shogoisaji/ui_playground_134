@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   go_router:
+  font_awesome_flutter:
+  url_launcher:
+  url_launcher_web:
 
 dev_dependencies:
   flutter_test:

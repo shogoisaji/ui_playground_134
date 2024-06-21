@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_widget.dart';
+import 'package:ui_playground_134/utils/github_link.dart';
 
 class StripeAnimationExample extends StatefulWidget {
   const StripeAnimationExample({super.key});
@@ -11,6 +13,8 @@ class StripeAnimationExample extends StatefulWidget {
 class _StripeAnimationExampleState extends State<StripeAnimationExample>
     with SingleTickerProviderStateMixin {
   final PageController _pageController = PageController();
+  static const _githubUrl =
+      'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart';
 
   int _tabNumber = 0;
 
@@ -26,6 +30,13 @@ class _StripeAnimationExampleState extends State<StripeAnimationExample>
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade100,
+        actions: [
+          IconButton(
+              icon: const FaIcon(FontAwesomeIcons.github),
+              onPressed: () async {
+                await GithubLink.openGithubLink(_githubUrl);
+              })
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
