@@ -23,10 +23,7 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --web-renderer html --base-href /
-
-      - name: Create .nojekyll file
-        run: touch ./build/web/.nojekyll
+      - run: flutter build web --web-renderer html --base-href /ui_playground_134/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
