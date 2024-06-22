@@ -24,4 +24,5 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/thumbnails/
+    - assets/gif/
+    - assets/thumbnails/

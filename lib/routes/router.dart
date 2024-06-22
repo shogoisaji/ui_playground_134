@@ -12,6 +12,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart',
     ),
     'date': DateTime(2024, 6, 21),
+    'thumbnail': 'stripe_animation.gif',
   },
 ];
 
@@ -111,7 +112,7 @@ class ListPage extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(8),
                                 child: Image.asset(
-                                  'assets/images/thumbnails/${pages[index]['name']}.png',
+                                  'assets/thumbnails/${pages[index]['thumbnail']}',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stack) {
                                     return Center(
