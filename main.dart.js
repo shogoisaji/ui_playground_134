@@ -75289,8 +75289,8 @@ r=A.hj("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\..*",!0,!1)
 if(!r.b.test(s))A.Z(A.br("\u5bfe\u8c61\u306e\u6587\u5b57\u5217\u306f\u300c2024-03-11T21:26:34.764871\u300d\u306e\u5f62\u5f0f\u3067\u3042\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059: "+s,o,o))
 q=J.ahC(s.split("T")[0],"-")
 s=A.hr(A.i(q[0])+"."+A.i(q[1])+"."+A.i(q[2]),o,B.aJ,A.ht(o,o,B.bp,o,o,o,o,o,o,o,o,14,o,o,o,o,o,!0,o,o,o,o,o,o,o,o))
-p=A.i($.k5()[b].j(0,"name"))
-return new A.oB(B.AL,B.cx,A.afc(!1,!0,new A.cA(B.cx,A.mc(A.b([n,new A.fr(B.y8,o,o,s,o),A.aeR(A.hP(o,new A.v1(A.au4(o,o,new A.tu("assets/images/thumbnails/"+p+".png",o,o)),new A.YP(),B.yK,o),B.t,o,o,o,o,o,o,B.cx,o))],t.F),B.bK,B.bL),o),o,!0,o,o,o,o,o,o,o,o,o,new A.YQ(a,b),o,o,o,o),o)},
+p=A.i($.k5()[b].j(0,"thumbnail"))
+return new A.oB(B.AL,B.cx,A.afc(!1,!0,new A.cA(B.cx,A.mc(A.b([n,new A.fr(B.y8,o,o,s,o),A.aeR(A.hP(o,new A.v1(A.au4(o,o,new A.tu("assets/thumbnails/"+p,o,o)),new A.YP(),B.yK,o),B.t,o,o,o,o,o,o,B.cx,o))],t.F),B.bK,B.bL),o),o,!0,o,o,o,o,o,o,o,o,o,new A.YQ(a,b),o,o,o,o),o)},
 $S:466}
 A.YQ.prototype={
 $0(){var s=this.b,r=A.i($.k5()[s].j(0,"name"))
@@ -80985,7 +80985,7 @@ r($,"aBx","aom",()=>{var q=null
 return A.aua(q,q,B.iS,B.cG,A.Bl(q,q,q))})
 s($,"aDc","aho",()=>A.hj(":(\\w+)(\\((?:\\\\.|[^\\\\()])+\\))?",!0,!1))
 s($,"aBf","ae9",()=>A.aiS())
-r($,"aDC","k5",()=>A.b([A.ap(["name","stripe_animation","page",B.KC,"date",new A.ft(A.ayI(A.atM(2024,6,21,0,0,0,0,!1)),!1)],t.N,t.z)],t.H7))
+r($,"aDC","k5",()=>A.b([A.ap(["name","stripe_animation","page",B.KC,"date",new A.ft(A.ayI(A.atM(2024,6,21,0,0,0,0,!1)),!1),"thumbnail","stripe_animation.gif"],t.N,t.z)],t.H7))
 s($,"aC_","ahe",()=>new A.y())
 r($,"avx","aoG",()=>{var q=new A.Zl()
 q.XL($.ahe())
