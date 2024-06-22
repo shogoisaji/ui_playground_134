@@ -13,6 +13,13 @@ class StripeAnimationExample extends StatefulWidget {
 
 class _StripeAnimationExampleState extends State<StripeAnimationExample>
     with SingleTickerProviderStateMixin {
+  final List<Map<String, dynamic>> tagList = [
+    {'label': 'Drink', 'color': Colors.blue.shade100},
+    {'label': 'Food', 'color': Colors.green.shade200},
+    {'label': 'Cafe', 'color': Colors.yellow.shade300},
+    {'label': 'Milk', 'color': Colors.pink.shade400},
+  ];
+
   final PageController _pageController = PageController();
 
   int _tabNumber = 0;
@@ -21,6 +28,8 @@ class _StripeAnimationExampleState extends State<StripeAnimationExample>
     setState(() {
       _tabNumber = number;
     });
+    _pageController.animateToPage(number,
+        duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
   @override
@@ -45,57 +54,27 @@ class _StripeAnimationExampleState extends State<StripeAnimationExample>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _TabSelector(
-                    text: 'Drink',
-                    isEnable: _tabNumber == 0,
+                for (int i = 0; i < tagList.length; i++)
+                  _TabSelector(
+                    text: tagList[i]['label'],
+                    isEnable: _tabNumber == i,
                     onTap: () {
-                      _handleTapTag(0);
-                      _pageController.animateToPage(0,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    }),
-                _TabSelector(
-                    text: 'Food',
-                    isEnable: _tabNumber == 1,
-                    onTap: () {
-                      _handleTapTag(1);
-                      _pageController.animateToPage(1,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    }),
-                _TabSelector(
-                    text: 'Coffee',
-                    isEnable: _tabNumber == 2,
-                    onTap: () {
-                      _handleTapTag(2);
-                      _pageController.animateToPage(2,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    }),
-                _TabSelector(
-                    text: 'Milk',
-                    isEnable: _tabNumber == 3,
-                    onTap: () {
-                      _handleTapTag(3);
-                      _pageController.animateToPage(3,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    }),
+                      _handleTapTag(i);
+                    },
+                  ),
               ],
             ),
           ),
           Expanded(
             child: Container(
-              width: double.infinity,
               color: Colors.blue,
+              width: double.infinity,
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 children: [
-                  _pageContent('Drink', Colors.blue.shade100),
-                  _pageContent('Food', Colors.green.shade200),
-                  _pageContent('Cafe', Colors.yellow.shade300),
-                  _pageContent('Milk', Colors.pink.shade400),
+                  for (int i = 0; i < tagList.length; i++)
+                    _pageContent(tagList[i]['label'], tagList[i]['color']),
                 ],
               ),
             ),
