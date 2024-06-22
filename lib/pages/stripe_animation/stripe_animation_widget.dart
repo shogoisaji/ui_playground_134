@@ -6,13 +6,13 @@ class StripeAnimationWidget extends StatefulWidget {
   final Widget child;
   final AnimationController animationController;
   final double stripeWidth;
-  final double moveRange;
+  final double maxStripeOffset;
 
   const StripeAnimationWidget({
     required this.child,
     required this.animationController,
     required this.stripeWidth,
-    required this.moveRange,
+    required this.maxStripeOffset,
     super.key,
   });
 
@@ -35,29 +35,27 @@ class _StripeAnimationWidgetState extends State<StripeAnimationWidget> {
   @override
   void initState() {
     super.initState();
+    _initializeAnimation();
+    _setupChildSizeMeasurement();
+  }
 
-    /// Set Random Move Amount
-    _offsets = List.generate(stripeCountMaxLength, (_) {
-      final rand = 1 - Random().nextDouble() * 2; // -1.0 ~ 1.0
-      return rand * widget.moveRange;
-    });
-
+  void _initializeAnimation() {
+    _offsets =
+        List.generate(stripeCountMaxLength, (_) => _generateRandomOffset());
     _animation = CurvedAnimation(
         parent: widget.animationController, curve: Curves.easeInQuad);
-
     widget.animationController.addStatusListener((status) {
-      if (status == AnimationStatus.dismissed) {
-        setState(() {
-          _isAnimating = false;
-        });
-      } else {
-        setState(() {
-          _isAnimating = true;
-        });
-      }
+      setState(() {
+        _isAnimating = status != AnimationStatus.dismissed;
+      });
     });
+  }
 
-    /// Get the size of a child widget from a global key
+  double _generateRandomOffset() {
+    return (1 - Random().nextDouble() * 2) * widget.maxStripeOffset;
+  }
+
+  void _setupChildSizeMeasurement() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_childKey.currentContext == null) return;
       final RenderBox renderBox =
@@ -72,42 +70,50 @@ class _StripeAnimationWidgetState extends State<StripeAnimationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return !_isAnimating
-        ? Container(
-            key: _childKey,
-            child: widget.child,
-          )
-        : SizedBox(
-            width: _childWidth,
-            height: _childHeight,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: List.generate(_stripeCount, (i) {
-                final x = i * widget.stripeWidth;
-                return AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Positioned(
-                      left: x,
-                      top: _offsets[i] * _animation.value,
-                      child: ClipRect(
-                        clipper: RectCustomClipper(
-                          rectSize: Size(widget.stripeWidth, _childHeight),
-                        ),
-                        child: Opacity(
-                          opacity: (1 - _animation.value).clamp(0.0, 1.0),
-                          child: Transform.translate(
-                            offset: Offset(-x, 0),
-                            child: widget.child,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }),
-            ),
+    return _isAnimating ? _buildAnimatingWidget() : _buildStaticWidget();
+  }
+
+  Widget _buildStaticWidget() {
+    return Container(
+      key: _childKey,
+      child: widget.child,
+    );
+  }
+
+  Widget _buildAnimatingWidget() {
+    return SizedBox(
+      width: _childWidth,
+      height: _childHeight,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: List.generate(_stripeCount, (index) {
+          final x = index * widget.stripeWidth;
+          return AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) => _buildStripePosition(x, index),
           );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildStripePosition(double x, int index) {
+    return Positioned(
+      left: x,
+      top: _offsets[index] * _animation.value,
+      child: ClipRect(
+        clipper: RectCustomClipper(
+          rectSize: Size(widget.stripeWidth, _childHeight),
+        ),
+        child: Opacity(
+          opacity: (1 - _animation.value).clamp(0.0, 1.0),
+          child: Transform.translate(
+            offset: Offset(-x, 0),
+            child: widget.child,
+          ),
+        ),
+      ),
+    );
   }
 }
 
