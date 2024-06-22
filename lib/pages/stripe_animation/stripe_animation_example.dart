@@ -157,7 +157,7 @@ class _TabSelectorState extends State<_TabSelector>
       child: StripeAnimationWidget(
         animationController: _animationController,
         stripeWidth: _stripeWidth,
-        moveRange: _moveRange,
+        maxStripeOffset: _moveRange,
         child: Text(widget.text,
             style: TextStyle(
               fontSize: _fontSize,
