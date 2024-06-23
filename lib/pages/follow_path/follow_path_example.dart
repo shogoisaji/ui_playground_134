@@ -151,7 +151,7 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
   }
 
   Path createPath(double width, Offset position, int index) {
-    const strength = 60.0;
+    const strength = 70.0;
 
     final p01 = Offset(position.dx, 0.8 * -strength);
     final p02 = Offset(position.dx + width / 5, 1.5 * -strength);
@@ -289,6 +289,8 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
           return Positioned(
             left: _itemsPositionList[index].dx,
             bottom: _itemsPositionList[index].dy,
+
+            /// Custom Widget
             child: FollowPathWidget(
               path: path,
               isMove: _currentIndex == index,
@@ -299,10 +301,16 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
                 child: Container(
                   width: _itemWidth,
                   height: _itemWidth,
-                  // padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.orange.shade700,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 3,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: Center(child: item['icon']),
                 ),
