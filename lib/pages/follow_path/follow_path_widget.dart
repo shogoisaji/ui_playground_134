@@ -20,6 +20,7 @@ class _FollowPathWidgetState extends State<FollowPathWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();

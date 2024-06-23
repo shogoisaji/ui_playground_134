@@ -13,6 +13,7 @@ class FollowPathExample extends StatefulWidget {
 
 class _FollowPathExampleState extends State<FollowPathExample> {
   final PageController _pageController = PageController();
+
   final List<Map<String, dynamic>> pageData = [
     {
       'text': 'Home',
@@ -57,34 +58,42 @@ class _FollowPathExampleState extends State<FollowPathExample> {
       ),
       body: Stack(
         children: [
-          PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _pageController,
-            children: [
-              for (final page in pageData)
-                Container(
-                  color: page['color'],
-                  child: Center(
-                    child: Text(
-                      page['text'],
-                      style: const TextStyle(color: Colors.white, fontSize: 60),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomNav(
-              showOrbitPath: _showOrbitPath,
-              onTapItem: (index) {
-                handleTapItem(index);
-              },
-              pageData: pageData,
+          _buildPageView(),
+          _buildBottomNav(),
+          _showPathButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPageView() {
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: _pageController,
+      children: [
+        for (final page in pageData)
+          Container(
+            color: page['color'],
+            child: Center(
+              child: Text(
+                page['text'],
+                style: const TextStyle(color: Colors.white, fontSize: 60),
+              ),
             ),
           ),
-          _showPathButton()
-        ],
+      ],
+    );
+  }
+
+  Widget _buildBottomNav() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: BottomNav(
+        showOrbitPath: _showOrbitPath,
+        onTapItem: (index) {
+          handleTapItem(index);
+        },
+        pageData: pageData,
       ),
     );
   }
@@ -120,8 +129,9 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
-  final double _bottomNavigatorHeight = 80.0;
-  final double _itemWidth = 50.0;
+  static const double _bottomNavigatorHeight = 80.0;
+  static const double _itemWidth = 50.0;
+  static const double _strength = 70.0;
 
   List<Offset> _itemsPositionList = List.generate(4, (index) => Offset.zero);
   int _currentIndex = 0;
@@ -150,39 +160,37 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
     widget.onTapItem(index);
   }
 
-  Path createPath(double width, Offset position, int index) {
-    const strength = 70.0;
-
-    final p01 = Offset(position.dx, 0.8 * -strength);
-    final p02 = Offset(position.dx + width / 5, 1.5 * -strength);
+  Path _createPath(double width, Offset position, int index) {
+    final p01 = Offset(position.dx, 0.8 * -_strength);
+    final p02 = Offset(position.dx + width / 5, 1.5 * -_strength);
     final p03 = Offset(position.dx + width / 5, -_itemWidth / 2.2);
 
-    final p04 = Offset(position.dx + width / 5, 0.7 * -strength);
-    final p05 = Offset(width / 2, 1.5 * -strength);
+    final p04 = Offset(position.dx + width / 5, 0.7 * -_strength);
+    final p05 = Offset(width / 2, 1.5 * -_strength);
     final p06 = Offset(width / 2, 0);
 
-    final p11 = Offset(position.dx, 1.0 * -strength);
-    final p12 = Offset(width / 2.3, -strength / 2);
+    final p11 = Offset(position.dx, 1.0 * -_strength);
+    final p12 = Offset(width / 2.3, -_strength / 2);
     final p13 = Offset(width / 2.2, -_itemWidth / 2.8);
 
-    final p14 = Offset(width / 2.1, -strength * 0.8);
-    final p15 = Offset(width / 2, 0.3 * -strength);
+    final p14 = Offset(width / 2.1, -_strength * 0.8);
+    final p15 = Offset(width / 2, 0.3 * -_strength);
     final p16 = Offset(width / 2, 0);
 
-    final p21 = Offset(position.dx, 2.0 * -strength);
-    final p22 = Offset(width / 2.3, -strength / 2);
+    final p21 = Offset(position.dx, 2.0 * -_strength);
+    final p22 = Offset(width / 2.3, -_strength / 2);
     final p23 = Offset(width / 2.2, -_itemWidth / 2.8);
 
-    final p24 = Offset(width / 2.1, -strength * 0.8);
-    final p25 = Offset(width / 2, 1.5 * -strength);
+    final p24 = Offset(width / 2.1, -_strength * 0.8);
+    final p25 = Offset(width / 2, 1.5 * -_strength);
     final p26 = Offset(width / 2, 0);
 
-    final p31 = Offset(position.dx, 0.8 * -strength);
-    final p32 = Offset(width - 20, -strength);
-    final p33 = Offset(width - _itemWidth / 2.8, -strength);
+    final p31 = Offset(position.dx, 0.8 * -_strength);
+    final p32 = Offset(width - 20, -_strength);
+    final p33 = Offset(width - _itemWidth / 2.8, -_strength);
 
-    final p34 = Offset(width - _itemWidth / 2.8, -strength * 2);
-    final p35 = Offset(width / 2, 1.5 * -strength);
+    final p34 = Offset(width - _itemWidth / 2.8, -_strength * 2);
+    final p35 = Offset(width / 2, 1.5 * -_strength);
     final p36 = Offset(width / 2, 0);
 
     final path = Path();
@@ -271,55 +279,66 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Positioned(
-          bottom: 0,
-          child: CustomPaint(
-            painter: _BottomNavStagePainter(
-              itemWidth: _itemWidth,
-              height: _bottomNavigatorHeight,
-            ),
-            size: Size(w, _bottomNavigatorHeight),
-          ),
-        ),
-        ...widget.pageData.map((item) {
-          final index = widget.pageData.indexOf(item);
-          final path = createPath(w, _itemsPositionList[index], index).shift(
-              Offset(-_itemsPositionList[index].dx,
-                  -_itemsPositionList[index].dy));
-          return Positioned(
-            left: _itemsPositionList[index].dx,
-            bottom: _itemsPositionList[index].dy,
-
-            /// Custom Widget
-            child: FollowPathWidget(
-              path: path,
-              isMove: _currentIndex == index,
-              child: GestureDetector(
-                onTap: () {
-                  handleTapItem(index);
-                },
-                child: Container(
-                  width: _itemWidth,
-                  height: _itemWidth,
-                  decoration: BoxDecoration(
-                    color: Colors.orange.shade700,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.4),
-                        blurRadius: 3,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(child: item['icon']),
-                ),
-              ),
-            ),
-          );
-        }),
+        _buildBottomNavStage(w),
+        ..._buildNavItems(w),
         widget.showOrbitPath ? _buildOrbitPath(w) : const SizedBox.shrink(),
       ],
+    );
+  }
+
+  Widget _buildBottomNavStage(double width) {
+    return Positioned(
+      bottom: 0,
+      child: CustomPaint(
+        painter: const _BottomNavStagePainter(
+          itemWidth: _itemWidth,
+          height: _bottomNavigatorHeight,
+        ),
+        size: Size(width, _bottomNavigatorHeight),
+      ),
+    );
+  }
+
+  List<Widget> _buildNavItems(double width) {
+    return widget.pageData.map((item) {
+      final index = widget.pageData.indexOf(item);
+      final path = _createPath(width, _itemsPositionList[index], index);
+      return _buildNavItem(item, index, path);
+    }).toList();
+  }
+
+  Widget _buildNavItem(Map<String, dynamic> item, int index, Path path) {
+    return Positioned(
+      left: _itemsPositionList[index].dx,
+      bottom: _itemsPositionList[index].dy,
+      child: FollowPathWidget(
+        path: path.shift(Offset(
+            -_itemsPositionList[index].dx, -_itemsPositionList[index].dy)),
+        isMove: _currentIndex == index,
+        child: _buildNavItemButton(item, index),
+      ),
+    );
+  }
+
+  Widget _buildNavItemButton(Map<String, dynamic> item, int index) {
+    return GestureDetector(
+      onTap: () => handleTapItem(index),
+      child: Container(
+        width: _itemWidth,
+        height: _itemWidth,
+        decoration: BoxDecoration(
+          color: Colors.orange.shade700,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Center(child: item['icon']),
+      ),
     );
   }
 
@@ -333,7 +352,7 @@ class _BottomNavState extends State<BottomNav> with TickerProviderStateMixin {
           child: IgnorePointer(
             child: CustomPaint(
               painter: _OrbitPainter(
-                path: createPath(w, _itemsPositionList[index], index),
+                path: _createPath(w, _itemsPositionList[index], index),
                 color: (item['color'] as MaterialColor).shade800,
               ),
               size: Size(w, _bottomNavigatorHeight),
