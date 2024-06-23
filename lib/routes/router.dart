@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
 import 'package:ui_playground_134/strings.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'follow_path',
+    'page': const FollowPathExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/follow_path/follow_path_example.dart',
+    ),
+    'date': DateTime(2024, 6, 22),
+    'thumbnail': '',
+  },
   {
     'name': 'stripe_animation',
     'page': const StripeAnimationExample(
