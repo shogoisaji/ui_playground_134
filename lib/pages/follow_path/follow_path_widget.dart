@@ -70,7 +70,8 @@ class _FollowPathWidgetState extends State<FollowPathWidget>
       animation: _animation,
       builder: (context, child) {
         return Transform.translate(
-          offset: getOffset(widget.path, _animation.value, 50),
+          offset:
+              getOffset(widget.path, (_animation.value).clamp(0.0, 1.0), 50),
           child: widget.child,
         );
       },

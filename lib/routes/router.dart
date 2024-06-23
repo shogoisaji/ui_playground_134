@@ -12,8 +12,8 @@ List<Map<String, dynamic>> pages = [
       githubUrl:
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/follow_path/follow_path_example.dart',
     ),
-    'date': DateTime(2024, 6, 22),
-    'thumbnail': '',
+    'date': DateTime(2024, 6, 23),
+    'thumbnail': 'follow_path.gif',
   },
   {
     'name': 'stripe_animation',
