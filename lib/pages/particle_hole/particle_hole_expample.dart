@@ -234,6 +234,7 @@ class ParticlePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
     Offset calcPosition(Particle particle) {
       return Offset(
           centerPosition.dx + cos(particle.angle) * holeRadius + particle.x,
