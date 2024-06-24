@@ -1,6 +1,6 @@
 # ⛲️UI Playground 134⛲️
 
-## [🐌 Particle Hole](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/follow_path/follow_path_example.dart)
+## [🐌 Particle Hole](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/particle_hole/particle_hole_expample.dart)
 
 ![particle_hole](https://github.com/shogoisaji/ui_playground_134/assets/131496728/41a00196-f1d8-4259-a670-9c3037f24389)
 
