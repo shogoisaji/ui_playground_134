@@ -73107,7 +73107,7 @@ o=j.f
 n=j.r
 m=j.d
 l=A.dJ(A.dV("Touch Me!",i,i,A.fT(i,i,B.hA,i,i,i,i,i,i,i,i,32,i,i,B.bF,i,i,!0,i,i,i,i,i,i,i,i)),i,i)
-k=A.eM(A.hT(A.b([j.yK("Wave Count",j.e,10,30,g,new A.a8R(j)),B.fC,j.yK("Wave Radius",j.f,10,30,g,new A.a8S(j)),B.fC,j.yK("Touch Strength",j.r,0,3,g,new A.a8T(j))],s),B.ap,B.bd,B.aT),i,p)
+k=A.eM(A.hT(A.b([j.yK("Wave Count",j.e,10,30,g,new A.a8R(j)),B.fC,j.yK("Wave Radius",j.f,10,50,g,new A.a8S(j)),B.fC,j.yK("Touch Strength",j.r,0,3,g,new A.a8T(j))],s),B.ap,B.bd,B.aT),i,p)
 return A.xw(r,B.kC,new A.I5(A.dJ(A.hT(A.b([B.jg,new A.uG(q,B.eh,p,h.a.b*0.3,o,n,l,m,i),B.jg,k,B.KK,A.akC(A.dV(!j.d?"Show Base Line":"Hide Base Line",i,i,i),new A.a8U(j)),B.jg],s),B.ap,B.qH,B.aT),i,i),i))},
 yK(a,b,c,d,e,f){var s=null,r=A.dV(a,s,s,s),q=A.agp(10),p=t.D
 return A.HG(A.b([A.WD(A.hT(A.b([r,A.dk(s,A.dV(B.c.a7(b,1),s,s,s),B.q,s,s,new A.cP(B.eh,s,s,q,s,s,B.aE),s,s,s,B.l3,s)],p),B.hK,B.bd,B.aT)),A.eM(new A.xY(b,new A.a8L(f),c,d,s),s,e*0.6)],p),B.ap,B.qF,B.aT)}}
