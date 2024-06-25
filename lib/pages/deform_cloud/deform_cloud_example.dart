@@ -75,7 +75,7 @@ class _DeformCloudExampleState extends State<DeformCloudExample> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      _buildAdjustSlider('Wave Radius', waveRadius, 10, 30, w,
+                      _buildAdjustSlider('Wave Radius', waveRadius, 10, 50, w,
                           (value) {
                         setState(() {
                           waveRadius = value;
