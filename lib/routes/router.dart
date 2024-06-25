@@ -13,7 +13,7 @@ List<Map<String, dynamic>> pages = [
     'name': 'deform_cloud',
     'page': const DeformCloudExample(
       githubUrl:
-          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/particle_hole/particle_hole_expample.dart',
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/deform_cloud/deform_cloud_example.dart',
     ),
     'date': DateTime(2024, 6, 25),
     'thumbnail': 'deform_cloud.gif',
