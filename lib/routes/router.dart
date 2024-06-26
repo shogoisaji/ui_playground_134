@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ui_playground_134/pages/deform_cloud/deform_cloud_example.dart';
 import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
 import 'package:ui_playground_134/pages/level_gauge/level_gauge_example.dart';
-import 'package:ui_playground_134/pages/particle_hole/particle_hole_expample.dart';
+import 'package:ui_playground_134/pages/particle_hole/particle_hole_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
 import 'package:ui_playground_134/strings.dart';
