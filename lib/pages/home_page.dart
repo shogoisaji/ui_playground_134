@@ -18,11 +18,10 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFF01579B),
-        title: const Text('UI Playground 134',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.w600)),
+        title: Image.asset(
+          'assets/images/logo.png',
+          width: (w * 0.6).clamp(0, 400),
+        ),
         actions: [
           IconButton(
               icon: FaIcon(
