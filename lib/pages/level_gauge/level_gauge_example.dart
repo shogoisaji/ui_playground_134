@@ -27,6 +27,8 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -125,7 +127,7 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
                       style: TextStyle(fontSize: 20, color: Colors.grey))
                   : const SizedBox.shrink(),
               LevelGaugeWidget(
-                width: 500,
+                width: 500.0.clamp(0, w),
                 height: 150,
                 value: 40,
                 minValue: 0,
