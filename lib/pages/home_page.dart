@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
                 FontAwesomeIcons.github,
                 color: Colors.blue.shade50,
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
                 await GithubLink.openGithubLink(githubUrl);
               })
