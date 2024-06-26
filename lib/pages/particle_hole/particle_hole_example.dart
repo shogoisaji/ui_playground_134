@@ -105,6 +105,7 @@ class _ParticleHoleExampleState extends State<ParticleHoleExample>
         actions: [
           IconButton(
             icon: const Icon(Icons.replay_outlined),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             onPressed: () {
               particles.clear();
               _ticker.stop();
@@ -118,6 +119,7 @@ class _ParticleHoleExampleState extends State<ParticleHoleExample>
           ),
           IconButton(
               icon: const FaIcon(FontAwesomeIcons.github),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
                 await GithubLink.openGithubLink(widget.githubUrl);
               })

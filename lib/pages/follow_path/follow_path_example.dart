@@ -51,6 +51,7 @@ class _FollowPathExampleState extends State<FollowPathExample> {
         actions: [
           IconButton(
               icon: const FaIcon(FontAwesomeIcons.github),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
                 await GithubLink.openGithubLink(widget.githubUrl);
               })

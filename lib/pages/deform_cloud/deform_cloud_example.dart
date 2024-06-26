@@ -27,6 +27,7 @@ class _DeformCloudExampleState extends State<DeformCloudExample> {
           actions: [
             IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 onPressed: () async {
                   await GithubLink.openGithubLink(widget.githubUrl);
                 })
