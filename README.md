@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🦚 Custom Modal](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/custom_modal/custom_modal_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/custom_modal)
+
+![custom_modal](https://github.com/shogoisaji/ui_playground_134/assets/131496728/cf37a17c-46bc-447a-9ff7-aa2a462eb71f)
+
+---
+
 ## [🦘 Level Gauge](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/level_gauge/level_gauge_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/level_gauge)
