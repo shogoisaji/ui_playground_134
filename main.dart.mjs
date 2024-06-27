@@ -342,8 +342,10 @@ _1184: (x0,x1) => x0.width = x1,
 _1186: (x0,x1) => x0.height = x1,
 _1189: (x0,x1) => x0.getContext(x1),
 _1264: x0 => x0.status,
+_1265: x0 => x0.headers,
 _1266: x0 => x0.body,
 _1267: x0 => x0.arrayBuffer(),
+_1270: (x0,x1) => x0.get(x1),
 _1272: x0 => x0.read(),
 _1273: x0 => x0.value,
 _1274: x0 => x0.done,
@@ -474,6 +476,13 @@ _1538: x0 => x0.ready,
 _1539: x0 => x0.selectedTrack,
 _1540: x0 => x0.repetitionCount,
 _1541: x0 => x0.frameCount,
+_1586: (x0,x1,x2,x3) => x0.open(x1,x2,x3),
+_1587: (x0,x1,x2) => x0.setRequestHeader(x1,x2),
+_1588: f => finalizeWrapper(f,x0 => dartInstance.exports._1588(f,x0)),
+_1589: (x0,x1,x2) => x0.addEventListener(x1,x2),
+_1590: f => finalizeWrapper(f,x0 => dartInstance.exports._1590(f,x0)),
+_1591: x0 => x0.send(),
+_1592: () => new XMLHttpRequest(),
 _1606: (x0,x1,x2,x3) => x0.open(x1,x2,x3),
 _1617: (x0,x1) => x0.matchMedia(x1),
 _1628: x0 => new Array(x0),
@@ -505,6 +514,13 @@ _1680: () => {
 _1681: () => typeof dartUseDateNowForTicks !== "undefined",
 _1682: () => 1000 * performance.now(),
 _1683: () => Date.now(),
+_1684: () => {
+      // On browsers return `globalThis.location.href`
+      if (globalThis.location != null) {
+        return stringToDartString(globalThis.location.href);
+      }
+      return null;
+    },
 _1686: () => new WeakMap(),
 _1687: (map, o) => map.get(o),
 _1688: (map, o, v) => map.set(o, v),
@@ -682,9 +698,13 @@ _1906: () => globalThis.window,
 _1927: x0 => x0.matches,
 _1931: x0 => x0.platform,
 _1936: x0 => x0.navigator,
+_1943: x0 => x0.status,
+_1944: (x0,x1) => x0.responseType = x1,
+_1946: x0 => x0.response,
 _3745: () => globalThis.window,
 _3825: x0 => x0.navigator,
-_4306: x0 => x0.userAgent
+_4306: x0 => x0.userAgent,
+_14589: () => globalThis.window.flutterCanvasKit
     };
 
     const baseImports = {
