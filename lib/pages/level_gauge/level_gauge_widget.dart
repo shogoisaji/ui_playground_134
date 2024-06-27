@@ -15,22 +15,25 @@ class LevelGaugeWidget extends StatefulWidget {
   final Color gaugeColor;
   final AnimationController animationController;
   final TextStyle? textStyle;
-  const LevelGaugeWidget(
-      {super.key,
-      required this.width,
-      required this.height,
-      required this.backgroundColor,
-      required this.value,
-      required this.minValue,
-      required this.maxValue,
-      required this.targetValue,
-      required this.gaugeWidth,
-      this.padding,
-      required this.textColor,
-      required this.achievedColor,
-      required this.gaugeColor,
-      required this.animationController,
-      this.textStyle});
+  final bool gaugePoint;
+  const LevelGaugeWidget({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.backgroundColor,
+    required this.value,
+    required this.minValue,
+    required this.maxValue,
+    required this.targetValue,
+    required this.gaugeWidth,
+    this.padding,
+    required this.textColor,
+    required this.achievedColor,
+    required this.gaugeColor,
+    required this.animationController,
+    this.textStyle,
+    this.gaugePoint = true,
+  });
 
   @override
   State<LevelGaugeWidget> createState() => _LevelGaugeWidgetState();
@@ -40,12 +43,16 @@ class _LevelGaugeWidgetState extends State<LevelGaugeWidget>
     with SingleTickerProviderStateMixin {
   late double _paddingValue;
   late Animation<double> _animation;
+  late Animation<double> _textAnimation;
 
   @override
   void initState() {
     super.initState();
-    _animation = Tween<double>(begin: 0, end: widget.value).animate(
-        CurvedAnimation(
+    _animation = CurvedAnimation(
+        parent: widget.animationController, curve: Curves.easeInOut);
+
+    _textAnimation = Tween<double>(begin: widget.minValue, end: widget.value)
+        .animate(CurvedAnimation(
             parent: widget.animationController, curve: Curves.easeInOut));
 
     _paddingValue =
@@ -64,50 +71,57 @@ class _LevelGaugeWidgetState extends State<LevelGaugeWidget>
             color: widget.backgroundColor,
             borderRadius: BorderRadius.circular(_paddingValue),
           ),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  width: widget.width - _paddingValue * 3 - widget.gaugeWidth,
-                  height: widget.height - _paddingValue * 3 - widget.gaugeWidth,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(_paddingValue * 0.7),
+          child: AnimatedBuilder(
+            animation: widget.animationController,
+            builder: (context, child) {
+              return Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      width:
+                          widget.width - _paddingValue * 3 - widget.gaugeWidth,
+                      height:
+                          widget.height - _paddingValue * 3 - widget.gaugeWidth,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(_paddingValue * 0.7),
+                      ),
+                      child: Center(
+                          child: Text(
+                        _textAnimation.value.toStringAsFixed(0),
+                        style: widget.textStyle,
+                      )),
+                    ),
                   ),
-                  child: Center(
-                      child: Text(
-                    widget.value.toString(),
-                    style: widget.textStyle,
-                  )),
-                ),
-              ),
-              AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return CustomPaint(
+                  CustomPaint(
                     painter: GaugePainter(
-                      value: _animation.value,
+                      animationValue: _animation,
+                      value: widget.value,
                       minValue: widget.minValue,
                       maxValue: widget.maxValue,
                       targetValue: widget.targetValue,
                       gaugeWidth: widget.gaugeWidth,
                       gaugeColor: widget.gaugeColor,
                       achievedColor: widget.achievedColor,
+                      cornerRadius: _paddingValue * 2,
+                      showGaugePoint: widget.gaugePoint,
                     ),
                     child: Container(),
-                  );
-                },
-              )
-            ],
+                  )
+                ],
+              );
+            },
           ),
-        ),
+        )
       ],
     );
   }
 }
 
 class GaugePainter extends CustomPainter {
+  final Animation<double> animationValue;
   final double value;
   final double minValue;
   final double maxValue;
@@ -115,63 +129,88 @@ class GaugePainter extends CustomPainter {
   final double gaugeWidth;
   final Color gaugeColor;
   final Color achievedColor;
+  final double cornerRadius;
+  final bool showGaugePoint;
 
   const GaugePainter(
-      {required this.value,
+      {required this.animationValue,
+      required this.value,
       required this.minValue,
       required this.maxValue,
       required this.targetValue,
       required this.gaugeWidth,
       required this.gaugeColor,
-      required this.achievedColor});
+      required this.achievedColor,
+      required this.cornerRadius,
+      required this.showGaugePoint});
 
-  double _calcGaugeLength(Size size, double percent) {
-    final baseHorizontalLength = size.width - gaugeWidth;
-    final baseVerticalLength = size.height - gaugeWidth;
-    final baseLength = baseHorizontalLength + baseVerticalLength;
-    return baseLength * percent;
+  Path _createBasePath(Size size, double gaugeWidth, double cornerRadius) {
+    final path = Path();
+    final baseUnderHeight = size.height - gaugeWidth / 2;
+    final baseRightWidth = size.width - gaugeWidth / 2;
+    final p0 = Offset(0 + gaugeWidth / 2, baseUnderHeight);
+    final p1 = Offset(baseRightWidth - cornerRadius, baseUnderHeight);
+    final p2 = Offset(p1.dx + cornerRadius / 2, baseUnderHeight);
+    final p3 = Offset(baseRightWidth, baseUnderHeight - cornerRadius / 2);
+    final p4 = Offset(baseRightWidth, baseUnderHeight - cornerRadius);
+    final p5 = Offset(baseRightWidth, 0 + gaugeWidth / 2);
+    path.moveTo(p0.dx, p0.dy);
+    path.lineTo(p1.dx, p1.dy);
+    path.cubicTo(p2.dx, p2.dy, p3.dx, p3.dy, p4.dx, p4.dy);
+    path.lineTo(p5.dx, p5.dy);
+    return path;
   }
+
+  Paint _createPaint(Color color) {
+    final paint = Paint();
+    paint.color = color;
+    paint.strokeCap = StrokeCap.round;
+    paint.strokeJoin = StrokeJoin.round;
+    paint.strokeWidth = gaugeWidth;
+    paint.style = PaintingStyle.stroke;
+    return paint;
+  }
+
+  void _drawGaugePoint() {}
 
   @override
   void paint(Canvas canvas, Size size) {
-    final percent = (value - minValue) / (maxValue - minValue);
+    final gaugeProgressPercent =
+        (animationValue.value * value - minValue) / (maxValue - minValue);
+    final targetPercent = (targetValue - minValue) / (maxValue - minValue);
 
-    final basePaint = Paint();
-    basePaint.color = Color.lerp(Colors.white, gaugeColor, 0.1) ?? gaugeColor;
-    basePaint.strokeCap = StrokeCap.round;
-    basePaint.strokeJoin = StrokeJoin.round;
-    basePaint.strokeWidth = gaugeWidth;
-    basePaint.style = PaintingStyle.stroke;
+    final basePaint =
+        _createPaint(Color.lerp(Colors.white, gaugeColor, 0.1) ?? Colors.white);
 
-    final gaugePaint = Paint();
-    gaugePaint.color = value > targetValue ? achievedColor : gaugeColor;
-    gaugePaint.strokeCap = StrokeCap.round;
-    gaugePaint.strokeJoin = StrokeJoin.round;
-    gaugePaint.strokeWidth = gaugeWidth;
-    gaugePaint.style = PaintingStyle.stroke;
+    final targetPaint =
+        _createPaint(Color.lerp(Colors.white, gaugeColor, 0.3) ?? Colors.white);
 
-    final basePath = Path();
-    basePath.moveTo(0 + gaugeWidth / 2, size.height - gaugeWidth / 2);
-    basePath.lineTo(size.width - gaugeWidth / 2, size.height - gaugeWidth / 2);
-    basePath.lineTo(size.width - gaugeWidth / 2, 0 + gaugeWidth / 2);
+    final gaugePaint = _createPaint(value * animationValue.value > targetValue
+        ? achievedColor
+        : gaugeColor);
 
-    final gaugeLength = _calcGaugeLength(size, percent);
+    final gaugePointPaint = _createPaint(
+        value * animationValue.value > targetValue
+            ? Color.lerp(Colors.black, achievedColor, 0.8) ?? achievedColor
+            : Color.lerp(Colors.black, gaugeColor, 0.8) ?? gaugeColor);
+
+    final basePath = _createBasePath(size, gaugeWidth, cornerRadius);
 
     final pathMetrics = basePath.computeMetrics().first;
-    final partialPath =
-        pathMetrics.extractPath(0, pathMetrics.length * percent);
-
-    final gaugePath = Path();
-    gaugePath.moveTo(0 + gaugeWidth / 2, size.height - gaugeWidth / 2);
-    gaugePath.lineTo(gaugeLength.clamp(0, size.width - gaugeWidth / 2),
-        size.height - gaugeWidth / 2);
-    gaugePath.lineTo(
-        size.width - gaugeWidth / 2,
-        (gaugeLength - size.width - gaugeWidth / 2)
-            .clamp(0, 0 + gaugeWidth / 2));
+    final gaugePoint = pathMetrics.extractPath(
+        pathMetrics.length * gaugeProgressPercent,
+        pathMetrics.length * gaugeProgressPercent);
+    final gaugePath =
+        pathMetrics.extractPath(0, pathMetrics.length * gaugeProgressPercent);
+    final targetPath =
+        pathMetrics.extractPath(0, pathMetrics.length * targetPercent);
 
     canvas.drawPath(basePath, basePaint);
-    canvas.drawPath(partialPath, gaugePaint);
+    canvas.drawPath(targetPath, targetPaint);
+    canvas.drawPath(gaugePath, gaugePaint);
+    if (showGaugePoint) {
+      canvas.drawPath(gaugePoint, gaugePointPaint);
+    }
   }
 
   @override
