@@ -1,6 +1,6 @@
-# ⛲️UI Playground 134⛲️
-
-![playground](https://github.com/shogoisaji/ui_playground_134/assets/131496728/0f8539c9-f866-4b20-8b0a-c0295d0d59c0)
+![logo](https://github.com/shogoisaji/ui_playground_134/assets/131496728/63855b5a-b817-489a-ab70-86ab391f5419)
+<br/>
+<br/>
 
 ## [🦘 Level Gauge](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/level_gauge/level_gauge_example.dart)
 
