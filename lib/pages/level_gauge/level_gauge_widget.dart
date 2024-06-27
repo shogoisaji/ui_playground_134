@@ -171,12 +171,10 @@ class GaugePainter extends CustomPainter {
     return paint;
   }
 
-  void _drawGaugePoint() {}
-
   @override
   void paint(Canvas canvas, Size size) {
-    final gaugeProgressPercent =
-        (animationValue.value * value - minValue) / (maxValue - minValue);
+    final normalizedValue = (value - minValue) / (maxValue - minValue);
+    final gaugeProgressPercent = normalizedValue * animationValue.value;
     final targetPercent = (targetValue - minValue) / (maxValue - minValue);
 
     final basePaint =
