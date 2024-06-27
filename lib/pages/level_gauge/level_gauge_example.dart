@@ -14,7 +14,6 @@ class LevelGaugeExample extends StatefulWidget {
 class _LevelGaugeExampleState extends State<LevelGaugeExample>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  bool _showData = false;
 
   @override
   void initState() {
@@ -30,6 +29,7 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
     final w = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade700,
       appBar: AppBar(
         actions: [
           IconButton(
@@ -44,6 +44,7 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
         child: Center(
           child: Column(
             children: [
+              const SizedBox(height: 18),
               Container(
                 width: 300,
                 decoration: BoxDecoration(
@@ -61,26 +62,20 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
                           return;
                         }
                         _animationController.reset();
-                        _animationController.forward();
                       },
-                      child: const Text('Animate'),
+                      child: const Text('Reset'),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          _showData = !_showData;
-                        });
+                        _animationController.reset();
+                        _animationController.forward();
                       },
-                      child: Text(_showData ? 'hide data' : 'show data'),
+                      child: const Text('Start'),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 18),
-              _showData
-                  ? const Text("value: 5000,range: 0~10000, target: 3000",
-                      style: TextStyle(fontSize: 20, color: Colors.grey))
-                  : const SizedBox.shrink(),
               LevelGaugeWidget(
                 width: 300,
                 height: 150,
@@ -98,23 +93,20 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
                   fontSize: 32,
                   color: Colors.blue.shade700,
                 ),
+                gaugePoint: false,
               ),
               const SizedBox(height: 18),
-              _showData
-                  ? const Text("value: 800,range: 0~1000, target: 700",
-                      style: TextStyle(fontSize: 20, color: Colors.grey))
-                  : const SizedBox.shrink(),
               LevelGaugeWidget(
-                width: 150,
+                width: 100,
                 height: 150,
                 value: 800,
-                minValue: 0,
+                minValue: 200,
                 maxValue: 1000,
                 targetValue: 700,
-                gaugeWidth: 30,
+                gaugeWidth: 7,
                 backgroundColor: Colors.amber.shade400,
                 textColor: Colors.amber.shade900,
-                achievedColor: Colors.red.shade900,
+                achievedColor: Colors.red.shade800,
                 gaugeColor: Colors.amber.shade800,
                 animationController: _animationController,
                 textStyle: TextStyle(
@@ -123,27 +115,24 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
                 ),
               ),
               const SizedBox(height: 18),
-              _showData
-                  ? const Text("value: 40,range: 0~100, target: 70",
-                      style: TextStyle(fontSize: 20, color: Colors.grey))
-                  : const SizedBox.shrink(),
               LevelGaugeWidget(
-                width: 500.0.clamp(0, w),
+                width: 400.0.clamp(0, w),
                 height: 150,
-                value: 40,
+                value: 4000,
                 minValue: 0,
-                maxValue: 100,
-                targetValue: 70,
-                gaugeWidth: 40,
-                padding: 8,
+                maxValue: 10000,
+                targetValue: 7000,
+                gaugeWidth: 30,
+                padding: 12,
                 backgroundColor: Colors.green.shade300,
                 textColor: Colors.green.shade800,
                 achievedColor: Colors.red.shade400,
                 gaugeColor: Colors.green.shade700,
                 animationController: _animationController,
                 textStyle: TextStyle(
-                  fontSize: 32,
+                  fontSize: 48,
                   color: Colors.green.shade700,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 18),

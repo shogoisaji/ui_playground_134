@@ -2,7 +2,7 @@
 
 ## [🦘 Level Gauge](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/level_gauge/level_gauge_example.dart)
 
-![level_gauge](https://github.com/shogoisaji/ui_playground_134/assets/131496728/bc1c12ca-49c6-452a-a7b9-a6e2f672f98c)
+![level_gauge](https://github.com/shogoisaji/ui_playground_134/assets/131496728/7b59d695-6e8f-4d19-88c0-31af151dd604)
 
 ---
 
@@ -21,7 +21,6 @@
 ## [🐍 Follow Path](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/follow_path/follow_path_example.dart)
 
 ![follow_path](https://github.com/shogoisaji/ui_playground_134/assets/131496728/51a9d003-2fe9-4c17-8581-07e5508c0771)
-
 
 ---
 
