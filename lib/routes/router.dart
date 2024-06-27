@@ -4,12 +4,22 @@ import 'package:ui_playground_134/pages/deform_cloud/deform_cloud_example.dart';
 import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
 import 'package:ui_playground_134/pages/home_page.dart';
 import 'package:ui_playground_134/pages/level_gauge/level_gauge_example.dart';
+import 'package:ui_playground_134/pages/custom_modal/custom_modal_example.dart';
 import 'package:ui_playground_134/pages/particle_hole/particle_hole_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'custom_modal',
+    'page': const CustomModalExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/custom_modal/custom_modal_example.dart',
+    ),
+    'date': DateTime(2024, 6, 27),
+    'thumbnail': 'custom_modal.gif',
+  },
   {
     'name': 'level_gauge',
     'page': const LevelGaugeExample(
