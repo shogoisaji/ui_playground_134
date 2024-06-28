@@ -27,3 +27,4 @@ flutter:
     - assets/images/
     - assets/gif/
     - assets/thumbnails/
+    - lib/pages/m_line_chart/data.json
