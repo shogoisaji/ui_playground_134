@@ -117,12 +117,16 @@ class ChartPainter extends CustomPainter {
   }
 
   void _paintChart(Canvas canvas, Size size, Path chartPath, double maskWidth) {
-    final paint = Paint();
-    paint.color = Colors.blue.shade300;
-    paint.strokeWidth = 2;
-    final basePaint = Paint();
-    basePaint.color = Colors.grey;
-    basePaint.strokeWidth = 2;
+    final paint = Paint()
+      ..color = Colors.blue.shade300
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke; // 線のスタイルを明示的に設定
+
+    final basePaint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke; // 線のスタイルを明示的に設定
+
     canvas.drawPath(chartPath, basePaint);
 
     final maskPath = Path()
