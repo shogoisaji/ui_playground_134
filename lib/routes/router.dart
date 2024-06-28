@@ -5,12 +5,22 @@ import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
 import 'package:ui_playground_134/pages/home_page.dart';
 import 'package:ui_playground_134/pages/level_gauge/level_gauge_example.dart';
 import 'package:ui_playground_134/pages/custom_modal/custom_modal_example.dart';
+import 'package:ui_playground_134/pages/m_line_chart/m_line_chart_example.dart';
 import 'package:ui_playground_134/pages/particle_hole/particle_hole_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'm_line_chart',
+    'page': const MLineChartExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/m_line_chart/m_line_chart_example.dart',
+    ),
+    'date': DateTime(2024, 6, 28),
+    'thumbnail': 'm_line_chart.gif',
+  },
   {
     'name': 'custom_modal',
     'page': const CustomModalExample(
