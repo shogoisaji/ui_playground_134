@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_playground_134/pages/deform_cloud/deform_cloud_widget.dart';
-import 'package:ui_playground_134/utils/github_link.dart';
+import 'package:ui_playground_134/utils/open_link.dart';
 
 class DeformCloudExample extends StatefulWidget {
   final String githubUrl;
@@ -29,7 +29,7 @@ class _DeformCloudExampleState extends State<DeformCloudExample> {
                 icon: const FaIcon(FontAwesomeIcons.github),
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 onPressed: () async {
-                  await GithubLink.openGithubLink(widget.githubUrl);
+                  await OpenLink.open(widget.githubUrl);
                 })
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_widget.dart';
-import 'package:ui_playground_134/utils/github_link.dart';
+import 'package:ui_playground_134/utils/open_link.dart';
 
 class StripeAnimationExample extends StatefulWidget {
   final String githubUrl;
@@ -43,7 +43,7 @@ class _StripeAnimationExampleState extends State<StripeAnimationExample>
               icon: const FaIcon(FontAwesomeIcons.github),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
-                await GithubLink.openGithubLink(widget.githubUrl);
+                await OpenLink.open(widget.githubUrl);
               })
         ],
       ),
