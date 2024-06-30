@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_playground_134/pages/level_gauge/level_gauge_widget.dart';
-import 'package:ui_playground_134/utils/github_link.dart';
+import 'package:ui_playground_134/utils/open_link.dart';
 
 class LevelGaugeExample extends StatefulWidget {
   final String githubUrl;
@@ -36,7 +36,7 @@ class _LevelGaugeExampleState extends State<LevelGaugeExample>
               icon: const FaIcon(FontAwesomeIcons.github),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
-                await GithubLink.openGithubLink(widget.githubUrl);
+                await OpenLink.open(widget.githubUrl);
               })
         ],
       ),

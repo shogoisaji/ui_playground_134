@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class GithubLink {
-  static Future<void> openGithubLink(String link) async {
+class OpenLink {
+  static Future<void> open(String link) async {
     if (kIsWeb) {
       // Webの場合
       await launchUrl(Uri.parse(link), webOnlyWindowName: '_self');

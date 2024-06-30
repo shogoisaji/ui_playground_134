@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ui_playground_134/routes/router.dart';
 import 'package:ui_playground_134/strings.dart';
-import 'package:ui_playground_134/utils/github_link.dart';
+import 'package:ui_playground_134/utils/open_link.dart';
 
 class HomePage extends StatelessWidget {
   final String githubUrl;
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
-                await GithubLink.openGithubLink(githubUrl);
+                await OpenLink.open(githubUrl);
               })
         ],
       ),
