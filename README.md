@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🦓 Rive Carousel](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_carousel/rive_carousel_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/rive_carousel)
+
+![rive_carousel](https://github.com/shogoisaji/ui_playground_134/assets/131496728/8837baef-a519-44d6-adc4-0e150fef5f6d)
+
+---
+
 ## [🦅 M Line Chart](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/m_line_chart/m_line_chart_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/m_line_chart)

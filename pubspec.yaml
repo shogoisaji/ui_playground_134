@@ -14,6 +14,8 @@ dependencies:
   url_launcher:
   url_launcher_web:
   auto_size_text:
+  rive:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
@@ -27,4 +29,5 @@ flutter:
     - assets/images/
     - assets/gif/
     - assets/thumbnails/
+    - assets/rive/
     - lib/pages/m_line_chart/data.json
