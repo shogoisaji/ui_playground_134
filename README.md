@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🐡 Volume Controller](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/volume_controller/volume_controller_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/volume_controller)
+
+![volume_controller](https://github.com/shogoisaji/ui_playground_134/assets/131496728/e9f7fb93-6276-445d-bb55-df91e262afce)
+
+---
+
 ## [🦓 Rive Carousel](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_carousel/rive_carousel_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/rive_carousel)

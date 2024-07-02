@@ -16,6 +16,7 @@ dependencies:
   auto_size_text:
   rive:
   flutter_svg:
+  provider:
 
 dev_dependencies:
   flutter_test:
