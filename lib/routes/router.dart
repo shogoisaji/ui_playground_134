@@ -10,9 +10,19 @@ import 'package:ui_playground_134/pages/particle_hole/particle_hole_example.dart
 import 'package:ui_playground_134/pages/rive_carousel/rive_carousel_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
+import 'package:ui_playground_134/pages/volume_controller/volume_controller_example.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'volume_controller',
+    'page': const VolumeControllerExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/volume_controller/volume_controller_example.dart',
+    ),
+    'date': DateTime(2024, 7, 2),
+    'thumbnail': 'volume_controller.gif',
+  },
   {
     'name': 'rive_carousel',
     'page': const RiveCarouselExample(
