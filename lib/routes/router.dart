@@ -8,12 +8,22 @@ import 'package:ui_playground_134/pages/custom_modal/custom_modal_example.dart';
 import 'package:ui_playground_134/pages/m_line_chart/m_line_chart_example.dart';
 import 'package:ui_playground_134/pages/particle_hole/particle_hole_example.dart';
 import 'package:ui_playground_134/pages/rive_carousel/rive_carousel_example.dart';
+import 'package:ui_playground_134/pages/rive_power/rive_power_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
 import 'package:ui_playground_134/pages/volume_controller/volume_controller_example.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'rive_power',
+    'page': const RivePowerExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_power/rive_power_example.dart',
+    ),
+    'date': DateTime(2024, 7, 3),
+    'thumbnail': 'rive_power.gif',
+  },
   {
     'name': 'volume_controller',
     'page': const VolumeControllerExample(
