@@ -15,6 +15,7 @@ class _RiveWidgetState extends State<RiveWidget> {
     final controller = StateMachineController.fromArtboard(artboard, 'state');
     artboard.addController(controller!);
     _shine = controller.findInput<double>('shine') as SMINumber;
+    _shine?.value = 0.0;
   }
 
   @override
