@@ -65,20 +65,27 @@ class HomePage extends StatelessWidget {
                           ? const SizedBox.shrink()
                           : Card(
                               margin: const EdgeInsets.all(8),
-                              elevation: 8,
+                              elevation: 6,
                               color: const Color(0xFF54C5F8),
                               child: InkWell(
                                 onTap: () {
-                                  context.go('/${pages[index]['name']}',
+                                  context.push('/${pages[index]['name']}',
                                       extra: pages[index]['github']);
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Center(
+                                child: Column(
+                                  children: [
+                                    Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 3.0,
+                                            bottom: 0.0,
+                                            left: 4.0,
+                                            right: 4.0),
                                         child: Text(
-                                          '${pages[index]['name']}',
+                                          '${pages[index]['name'].split('_').map((word) {
+                                            final String w = word;
+                                            return w.capitalize();
+                                          }).join(' ')}',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.grey[800],
@@ -87,44 +94,75 @@ class HomePage extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: Text(
-                                          (pages[index]['date'] as DateTime)
-                                              .toIso8601String()
-                                              .toYMDString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.grey[800],
-                                            fontSize: 14,
-                                          ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.only(
+                                            top: 2,
+                                            bottom: 6,
+                                            left: 6,
+                                            right: 6),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5.0, horizontal: 6.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue.shade50,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              blurRadius: 3,
+                                              offset: const Offset(0, 1),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(8),
-                                          child: Image.asset(
-                                            'assets/thumbnails/${pages[index]['thumbnail']}',
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stack) {
-                                              return Center(
-                                                child: Text(
-                                                  'No Image',
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      color:
-                                                          Colors.grey.shade700,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              (pages[index]['date'] as DateTime)
+                                                  .toIso8601String()
+                                                  .toYMDString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.grey[500],
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                child: SizedBox(
+                                                  width: double.infinity,
+                                                  child: Image.asset(
+                                                    'assets/thumbnails/${pages[index]['thumbnail']}',
+                                                    fit: BoxFit.cover,
+                                                    errorBuilder: (context,
+                                                        error, stack) {
+                                                      return Center(
+                                                        child: Text(
+                                                          'No Image',
+                                                          style: TextStyle(
+                                                              fontSize: 24,
+                                                              color: Colors.grey
+                                                                  .shade700,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
                                                 ),
-                                              );
-                                            },
-                                          ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

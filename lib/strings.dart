@@ -9,4 +9,8 @@ extension StringExtension on String {
     final dateParts = split('T')[0].split('-');
     return "${dateParts[0]}.${dateParts[1]}.${dateParts[2]}";
   }
+
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
 }
