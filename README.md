@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🦭 Rive Power](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_power/rive_power_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/rive_power)
+
+![rive_power](https://github.com/shogoisaji/ui_playground_134/assets/131496728/ba64a2a6-39c9-49e5-9cda-3ad2ffcc927a)
+
+---
+
 ## [🐡 Volume Controller](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/volume_controller/volume_controller_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/volume_controller)
