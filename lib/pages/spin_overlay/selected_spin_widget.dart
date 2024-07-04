@@ -1,17 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-class TappedImage {
-  TappedImage(
-      {required this.offset, required this.size, required this.imageLink});
-  Offset offset;
-  Size size;
-  String imageLink;
-
-  void updateOffset(Offset offset) {
-    this.offset = offset;
-  }
-}
+import 'package:ui_playground_134/pages/spin_overlay/tapped_image.dart';
 
 class SelectedSpinWidget extends StatefulWidget {
   const SelectedSpinWidget({
@@ -74,14 +63,17 @@ class _SelectedSpinWidgetState extends State<SelectedSpinWidget>
   }
 
   void _handlePanUpdate(details) {
+    if (_tappedImage == null) return;
     final adjustedDelta =
         Offset(-details.delta.dx * 1.5, details.delta.dy * 1.5);
+    final updatedTappedImage =
+        _tappedImage!.copyWith(offset: _tappedImage!.offset + adjustedDelta);
     setState(() {
-      _tappedImage!.updateOffset(_tappedImage!.offset + adjustedDelta);
-
-      /// overlayの再描画
-      _overlayEntry?.markNeedsBuild();
+      _tappedImage = updatedTappedImage;
     });
+
+    /// overlayの再描画
+    _overlayEntry?.markNeedsBuild();
   }
 
   void _handleTap(BuildContext context) {
@@ -90,12 +82,13 @@ class _SelectedSpinWidgetState extends State<SelectedSpinWidget>
     });
     _getTapedImageData();
     if (_tappedImage == null) return;
-    _showOverlay(context, _tappedImage!);
+    _showOverlay(context);
     _animationController.reset();
     _animationController.forward();
   }
 
-  void _showOverlay(BuildContext context, TappedImage tappedImage) {
+  void _showOverlay(BuildContext context) {
+    if (_tappedImage == null) return;
     _overlayEntry = OverlayEntry(
       builder: (context) => GestureDetector(
         onTap: _removeOverlay,
@@ -104,10 +97,10 @@ class _SelectedSpinWidgetState extends State<SelectedSpinWidget>
           child: Stack(
             children: [
               Positioned(
-                top: tappedImage.offset.dy,
-                left: tappedImage.offset.dx,
+                top: _tappedImage!.offset.dy,
+                left: _tappedImage!.offset.dx,
                 child: SpinAnimationWidget(
-                  width: tappedImage.size.width * _scale,
+                  width: _tappedImage!.size.width * _scale,
                   animationController: _animationController,
                   child: GestureDetector(
                       onTap: () {
@@ -119,17 +112,17 @@ class _SelectedSpinWidgetState extends State<SelectedSpinWidget>
                       child: CachedNetworkImage(
                         key: _tapedImageKey,
                         imageUrl: widget.imageLink,
-                        width: tappedImage.size.width * _scale,
-                        height: tappedImage.size.height * _scale,
+                        width: _tappedImage!.size.width * _scale,
+                        height: _tappedImage!.size.height * _scale,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Container(
-                          width: tappedImage.size.width * _scale,
-                          height: tappedImage.size.height * _scale,
+                          width: _tappedImage!.size.width * _scale,
+                          height: _tappedImage!.size.height * _scale,
                           color: Colors.grey[400],
                         ),
                         errorWidget: (context, url, error) => Container(
-                          width: tappedImage.size.width * _scale,
-                          height: tappedImage.size.height * _scale,
+                          width: _tappedImage!.size.width * _scale,
+                          height: _tappedImage!.size.height * _scale,
                           color: Colors.grey[400],
                           child: const Icon(Icons.error),
                         ),
