@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🐓 Spin Overlay](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/spin_overlay/spin_overlay_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/spin_overlay)
+
+![spin_overlay](https://github.com/shogoisaji/ui_playground_134/assets/131496728/9b7b4219-0974-4d06-a668-758d9b69e94e)
+
+---
+
 ## [🦭 Rive Power](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_power/rive_power_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/rive_power)
