@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                               color: const Color(0xFF54C5F8),
                               child: InkWell(
                                 onTap: () {
-                                  context.push('/${pages[index]['name']}',
+                                  context.go('/${pages[index]['name']}',
                                       extra: pages[index]['github']);
                                 },
                                 child: Column(
