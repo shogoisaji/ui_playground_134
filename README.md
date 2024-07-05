@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🐫 ScaleUp Nav](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/scaleup_nav/scaleup_nav_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/scaleup_nav)
+
+![scaleup_nav](https://github.com/shogoisaji/ui_playground_134/assets/131496728/a95e1f00-d3f9-4745-9cfd-642fa86ad6c4)
+
+---
+
 ## [🐓 Spin Overlay](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/spin_overlay/spin_overlay_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/spin_overlay)
