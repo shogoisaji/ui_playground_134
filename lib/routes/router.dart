@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui_playground_134/pages/scaleup_nav/custom_nav_example.dart';
 import 'package:ui_playground_134/pages/deform_cloud/deform_cloud_example.dart';
 import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
 import 'package:ui_playground_134/pages/home_page.dart';
@@ -16,6 +17,15 @@ import 'package:ui_playground_134/pages/volume_controller/volume_controller_exam
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'scaleup_nav',
+    'page': const ScaleupNavExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/scaleup_nav/scaleup_nav_example.dart',
+    ),
+    'date': DateTime(2024, 7, 5),
+    'thumbnail': 'scaleup_nav.gif',
+  },
   {
     'name': 'spin_overlay',
     'page': const SpinOverlayExample(
