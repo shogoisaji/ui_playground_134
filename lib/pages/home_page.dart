@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -5,9 +7,32 @@ import 'package:ui_playground_134/routes/router.dart';
 import 'package:ui_playground_134/strings.dart';
 import 'package:ui_playground_134/utils/open_link.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String githubUrl;
   const HomePage({super.key, required this.githubUrl});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _isIos = false;
+  void detectDevice() {
+    String userAgent = html.window.navigator.userAgent.toLowerCase();
+    if (userAgent.contains('iphone') || userAgent.contains('ipad')) {
+      _isIos = true;
+    } else if (userAgent.contains('android')) {
+      // _isIos = false;
+    } else {
+      // print('その他のデバイスです');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    detectDevice();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +55,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               onPressed: () async {
-                await OpenLink.open(githubUrl);
+                await OpenLink.open(widget.githubUrl);
               })
         ],
       ),
@@ -137,27 +162,17 @@ class HomePage extends StatelessWidget {
                                                 child: RepaintBoundary(
                                                   child: SizedBox(
                                                     width: double.infinity,
-                                                    child: Image.asset(
-                                                      // 'assets/thumbnails/${pages[index]['thumbnail']}',
-                                                      'assets/thumbnails/${pages[index]['test']}',
-                                                      fit: BoxFit.cover,
-                                                      errorBuilder: (context,
-                                                          error, stack) {
-                                                        return Center(
-                                                          child: Text(
-                                                            'No Image',
-                                                            style: TextStyle(
-                                                                fontSize: 24,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade700,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                    child: _isIos
+                                                        ? _errorImage()
+                                                        : Image.asset(
+                                                            'assets/thumbnails/${pages[index]['thumbnail']}',
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stack) {
+                                                              return _errorImage();
+                                                            },
                                                           ),
-                                                        );
-                                                      },
-                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -177,6 +192,18 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _errorImage() {
+    return Center(
+      child: Text(
+        'No Image',
+        style: TextStyle(
+            fontSize: 24,
+            color: Colors.grey.shade700,
+            fontWeight: FontWeight.bold),
       ),
     );
   }
