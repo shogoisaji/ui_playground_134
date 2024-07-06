@@ -134,26 +134,29 @@ class HomePage extends StatelessWidget {
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
-                                                child: SizedBox(
-                                                  width: double.infinity,
-                                                  child: Image.asset(
-                                                    'assets/thumbnails/${pages[index]['thumbnail']}',
-                                                    fit: BoxFit.cover,
-                                                    errorBuilder: (context,
-                                                        error, stack) {
-                                                      return Center(
-                                                        child: Text(
-                                                          'No Image',
-                                                          style: TextStyle(
-                                                              fontSize: 24,
-                                                              color: Colors.grey
-                                                                  .shade700,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      );
-                                                    },
+                                                child: RepaintBoundary(
+                                                  child: SizedBox(
+                                                    width: double.infinity,
+                                                    child: Image.asset(
+                                                      'assets/thumbnails/${pages[index]['thumbnail']}',
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                          error, stack) {
+                                                        return Center(
+                                                          child: Text(
+                                                            'No Image',
+                                                            style: TextStyle(
+                                                                fontSize: 24,
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
                                                   ),
                                                 ),
                                               ),
