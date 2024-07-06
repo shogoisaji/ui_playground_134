@@ -24,7 +24,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/scaleup_nav/scaleup_nav_example.dart',
     ),
     'date': DateTime(2024, 7, 5),
-    'thumbnail': 'scaleup_nav.gif',
+    'thumbnail': 'scaleup_nav.webp',
   },
   {
     'name': 'spin_overlay',
@@ -33,7 +33,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/spin_overlay/spin_overlay_example.dart',
     ),
     'date': DateTime(2024, 7, 4),
-    'thumbnail': 'spin_overlay.gif',
+    'thumbnail': 'spin_overlay.webp',
   },
   {
     'name': 'rive_power',
@@ -42,7 +42,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_power/rive_power_example.dart',
     ),
     'date': DateTime(2024, 7, 3),
-    'thumbnail': 'rive_power.gif',
+    'thumbnail': 'rive_power.webp',
   },
   {
     'name': 'volume_controller',
@@ -51,7 +51,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/volume_controller/volume_controller_example.dart',
     ),
     'date': DateTime(2024, 7, 2),
-    'thumbnail': 'volume_controller.gif',
+    'thumbnail': 'volume_controller.webp',
   },
   {
     'name': 'rive_carousel',
@@ -60,7 +60,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/rive_carousel/rive_carousel_example.dart',
     ),
     'date': DateTime(2024, 6, 30),
-    'thumbnail': 'rive_carousel.gif',
+    'thumbnail': 'rive_carousel.webp',
   },
   {
     'name': 'm_line_chart',
@@ -69,7 +69,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/m_line_chart/m_line_chart_example.dart',
     ),
     'date': DateTime(2024, 6, 28),
-    'thumbnail': 'm_line_chart.gif',
+    'thumbnail': 'm_line_chart.webp',
   },
   {
     'name': 'custom_modal',
@@ -78,7 +78,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/custom_modal/custom_modal_example.dart',
     ),
     'date': DateTime(2024, 6, 27),
-    'thumbnail': 'custom_modal.gif',
+    'thumbnail': 'custom_modal.webp',
   },
   {
     'name': 'level_gauge',
@@ -87,7 +87,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/level_gauge/level_gauge_example.dart',
     ),
     'date': DateTime(2024, 6, 26),
-    'thumbnail': 'level_gauge.gif',
+    'thumbnail': 'level_gauge.webp',
   },
   {
     'name': 'deform_cloud',
@@ -96,7 +96,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/deform_cloud/deform_cloud_example.dart',
     ),
     'date': DateTime(2024, 6, 25),
-    'thumbnail': 'deform_cloud.gif',
+    'thumbnail': 'deform_cloud.webp',
   },
   {
     'name': 'particle_hole',
@@ -105,7 +105,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/particle_hole/particle_hole_expample.dart',
     ),
     'date': DateTime(2024, 6, 24),
-    'thumbnail': 'particle_hole.gif',
+    'thumbnail': 'particle_hole.webp',
   },
   {
     'name': 'follow_path',
@@ -114,7 +114,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/follow_path/follow_path_example.dart',
     ),
     'date': DateTime(2024, 6, 23),
-    'thumbnail': 'follow_path.gif',
+    'thumbnail': 'follow_path.webp',
   },
   {
     'name': 'stripe_animation',
@@ -123,7 +123,7 @@ List<Map<String, dynamic>> pages = [
           'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/stripe_animation/stripe_animation_example.dart',
     ),
     'date': DateTime(2024, 6, 21),
-    'thumbnail': 'stripe_animation.gif',
+    'thumbnail': 'stripe_animation.webp',
   },
 ];
 
