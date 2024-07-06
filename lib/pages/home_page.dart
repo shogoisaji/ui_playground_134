@@ -138,7 +138,8 @@ class HomePage extends StatelessWidget {
                                                   child: SizedBox(
                                                     width: double.infinity,
                                                     child: Image.asset(
-                                                      'assets/thumbnails/${pages[index]['thumbnail']}',
+                                                      // 'assets/thumbnails/${pages[index]['thumbnail']}',
+                                                      'assets/thumbnails/${pages[index]['test']}',
                                                       fit: BoxFit.cover,
                                                       errorBuilder: (context,
                                                           error, stack) {
