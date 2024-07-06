@@ -153,5 +153,22 @@ GoRouter router() {
   return GoRouter(
     initialLocation: '/',
     routes: routes,
+    errorBuilder: (context, state) => ErrorPage(error: state.error),
+    redirect: (context, state) {
+      return null;
+    },
   );
+}
+
+class ErrorPage extends StatelessWidget {
+  final Exception? error;
+  const ErrorPage({super.key, this.error});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('エラー')),
+      body: Center(child: Text('エラーが発生しました: ${error.toString()}')),
+    );
+  }
 }
