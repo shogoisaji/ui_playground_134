@@ -85,7 +85,7 @@ class _SelectedZoomWidgetState extends State<SelectedZoomWidget>
                 child: CachedNetworkImage(
                   key: _tapedImageKey,
                   imageUrl: widget.imageLink,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   placeholder: (context, url) => Container(
                     color: Colors.grey[400],
                   ),

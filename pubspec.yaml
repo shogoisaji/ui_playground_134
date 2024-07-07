@@ -18,7 +18,6 @@ dependencies:
   flutter_svg:
   provider:
   cached_network_image:
-  video_player:
 
 dev_dependencies:
   flutter_test:
