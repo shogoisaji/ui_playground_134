@@ -31,5 +31,6 @@ flutter:
     - assets/images/
     - assets/gif/
     - assets/thumbnails/
+    - assets/animated_thumbnails/
     - assets/rive/
     - lib/pages/m_line_chart/data.json
