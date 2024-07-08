@@ -31355,6 +31355,7 @@ SB:function SB(){},
 Pt:function Pt(){},
 uF:function uF(a){this.a=a},
 a49:function a49(a){var _=this
+_.d=!1
 _.a=_.e=null
 _.b=a
 _.c=null},
@@ -106740,7 +106741,8 @@ am(){return new A.a49(B.i)}}
 A.a49.prototype={
 aJ(){this.aS()
 var s=window.navigator.userAgent.toLowerCase()
-if(!(B.d.A(s,"iphone")||B.d.A(s,"ipad")))B.d.A(s,"android")},
+if(B.d.A(s,"iphone")||B.d.A(s,"ipad"))this.d=!0
+else if(B.d.A(s,"android"))this.d=!0},
 M(a){var s,r,q=null,p=A.bt(a,B.ao,t.w).w.a.a,o=A.akH("assets/images/logo.png",q,q,B.c.cj(p*0.6,0,400)),n=t.p
 o=A.i4(A.a([A.hl(q,new A.FC(B.pz,B.dm,q),new A.aC4(this),B.aD,q,q)],n),B.o6,o)
 s=A.bF(q,q,B.l,q,q,new A.ci(q,q,q,q,q,new A.mS(B.CK,B.CN,B.ai,A.a([B.o6,B.fV],t.t_),q,q),B.U),1/0,q,q,q,1/0)
@@ -106775,6 +106777,7 @@ k=s}return k},
 $S:217}
 A.aC3.prototype={
 $1(a){var s=this.a
+if(s.d)return
 s.af(new A.aBX(s,this.b))},
 $S:198}
 A.aBX.prototype={
@@ -106782,6 +106785,7 @@ $0(){this.a.e=this.b},
 $S:0}
 A.aC2.prototype={
 $1(a){var s=this.a
+if(s.d)return
 s.af(new A.aBY(s))},
 $S:39}
 A.aBY.prototype={
