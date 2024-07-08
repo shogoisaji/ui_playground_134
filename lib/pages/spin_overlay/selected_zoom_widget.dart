@@ -74,9 +74,7 @@ class _SelectedZoomWidgetState extends State<SelectedZoomWidget>
         onTap: _removeOverlay,
         child: Container(
           color: Colors.black.withOpacity(0.5),
-          child: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
+          child: SizedBox.expand(
             child: InteractiveViewer(
                 transformationController: _transformController,
                 boundaryMargin: const EdgeInsets.all(double.infinity),
