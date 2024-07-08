@@ -16,15 +16,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isIos = false;
+  bool _isMobile = false;
   int? _hoverIndex;
 
   void detectDevice() {
     String userAgent = html.window.navigator.userAgent.toLowerCase();
     if (userAgent.contains('iphone') || userAgent.contains('ipad')) {
-      _isIos = true;
+      _isMobile = true;
     } else if (userAgent.contains('android')) {
-      // _isIos = false;
+      _isMobile = true;
     } else {
       // print('その他のデバイスです');
     }
@@ -108,11 +108,13 @@ class _HomePageState extends State<HomePage> {
                         color: const Color(0xFF54C5F8),
                         child: MouseRegion(
                           onHover: (_) {
+                            if (_isMobile) return;
                             setState(() {
                               _hoverIndex = index;
                             });
                           },
                           onExit: (_) {
+                            if (_isMobile) return;
                             setState(() {
                               _hoverIndex = null;
                             });
