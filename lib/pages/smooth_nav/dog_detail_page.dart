@@ -85,9 +85,9 @@ class DogDetailPage extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.4),
-                blurRadius: 3,
-                spreadRadius: 2,
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 4,
+                spreadRadius: 3,
                 offset: const Offset(1, 2),
               ),
             ],

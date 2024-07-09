@@ -71,6 +71,9 @@ class _SmoothNavExampleState extends State<SmoothNavExample> {
                         fontWeight: FontWeight.bold,
                       )),
                 ),
+                const Text(
+                  '※写真はランダム',
+                ),
                 Expanded(
                   child: SizedBox(
                     child: ListView.builder(

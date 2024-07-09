@@ -17,16 +17,30 @@ class DogData {
 
   static Future<List<DogData>> createData(int count) async {
     if (count > dogs.length) throw Exception("Count is out of range");
-    final futures = List.generate(count, (i) async {
+    final List<DogData> list = [];
+    for (int i = 0; i < count; i++) {
       final image = await _fetchImage();
-      return DogData(
+      list.add(DogData(
         image: image,
         name: dogs[i]["name"] as String,
         description: dogs[i]["description"] as String,
         rating: dogs[i]["rating"] as double,
-      );
-    });
-    return await Future.wait(futures);
+      ));
+    }
+    return list;
+
+    /// ランダムにならない可能性がある。パフォーマンスは良い
+    ///
+    // final futures = List.generate(count, (i) async {
+    //   final image = await _fetchImage();
+    //   return DogData(
+    //     image: image,
+    //     name: dogs[i]["name"] as String,
+    //     description: dogs[i]["description"] as String,
+    //     rating: dogs[i]["rating"] as double,
+    //   );
+    // });
+    // return await Future.wait(futures);
   }
 
   static Future<Image> _fetchImage() async {
