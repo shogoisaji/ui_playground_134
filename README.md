@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🐫 Smooth Nav](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/smooth_nav/smooth_nav_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/smooth_nav)
+
+<img width="493" alt="smooth_nav" src="https://github.com/shogoisaji/ui_playground_134/assets/131496728/91f4d8d0-9842-416c-99cb-59fb9883c7e3">
+
+---
+
 ## [🐫 ScaleUp Nav](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/scaleup_nav/scaleup_nav_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/scaleup_nav)
