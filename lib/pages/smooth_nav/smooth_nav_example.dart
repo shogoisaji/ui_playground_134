@@ -4,6 +4,9 @@ import 'package:ui_playground_134/pages/smooth_nav/dog_data.dart';
 import 'package:ui_playground_134/pages/smooth_nav/dog_detail_page.dart';
 import 'package:ui_playground_134/utils/open_link.dart';
 
+/// This widget has the same usage as the Hero widget
+/// https://api.flutter.dev/flutter/widgets/Hero-class.html
+///
 class SmoothNavExample extends StatefulWidget {
   final String githubUrl;
   const SmoothNavExample({super.key, required this.githubUrl});
@@ -164,6 +167,14 @@ class _ListContentState extends State<_ListContent> {
         Navigator.of(context)
             .push(_smoothRoute(widget.dogData.image, widget.dogData));
       },
+
+      /// use Hero
+      ///
+      // onTap: () {
+      //   Navigator.of(context).push(MaterialPageRoute(
+      //     builder: (context) => DogDetailPage(dogData: widget.dogData),
+      //   ));
+      // },
       child: Align(
         child: Container(
           width: w * 0.9,
@@ -179,6 +190,19 @@ class _ListContentState extends State<_ListContent> {
                   child: widget.dogData.image,
                 ),
               ),
+
+              /// use Hero
+              // Hero(
+              //   tag: widget.dogData.name,
+              //   child: ClipRRect(
+              //     key: _imageKey,
+              //     borderRadius: BorderRadius.circular(10),
+              //     child: AspectRatio(
+              //       aspectRatio: 1,
+              //       child: widget.dogData.image,
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),

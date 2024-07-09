@@ -17,10 +17,13 @@ class DogDetailPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(
-                      width: w,
-                      height: w,
-                      child: dogData.image,
+                    Hero(
+                      tag: dogData.image,
+                      child: SizedBox(
+                        width: w,
+                        height: w,
+                        child: dogData.image,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
