@@ -18,6 +18,7 @@ dependencies:
   flutter_svg:
   provider:
   cached_network_image:
+  lottie:
 
 dev_dependencies:
   flutter_test:
@@ -33,4 +34,5 @@ flutter:
     - assets/thumbnails/
     - assets/animated_thumbnails/
     - assets/rive/
+    - assets/lottie/
     - lib/pages/m_line_chart/data.json
