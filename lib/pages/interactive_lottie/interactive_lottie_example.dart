@@ -19,12 +19,14 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
   late AnimationController _baseAnimationController;
 
   final ValueNotifier<bool> _isSending = ValueNotifier<bool>(false);
+  bool _isFailed = false;
 
   final Map<String, Map<String, double>> animationList = {
     'send': const {'start': 1.0, 'end': 1.6},
     'loop': const {'start': 0.0, 'end': 1.0},
     'load': const {'start': 4.1, 'end': 6.0},
     'done': const {'start': 2.0, 'end': 3.0},
+    'failed': const {'start': 3.1, 'end': 3.9},
   };
 
   void _sendAnimation() async {
@@ -33,8 +35,13 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
     _lottieController.pointLoop(
         animationList['load']!['start']!, animationList['load']!['end']!);
     await Future.delayed(const Duration(milliseconds: 4000));
-    await _lottieController.pointForward(
-        animationList['done']!['start']!, animationList['done']!['end']!);
+    if (_isFailed) {
+      await _lottieController.pointForward(
+          animationList['failed']!['start']!, animationList['failed']!['end']!);
+    } else {
+      await _lottieController.pointForward(
+          animationList['done']!['start']!, animationList['done']!['end']!);
+    }
     await Future.delayed(const Duration(milliseconds: 1000));
     _lottieController.value = 0.0;
     _isSending.value = false;
@@ -97,6 +104,25 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
                 ),
               ),
               _interactiveLottie(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(_isFailed ? 'Failed' : 'Done',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green.shade800,
+                      )),
+                  Switch(
+                    value: _isFailed,
+                    onChanged: (value) {
+                      setState(() {
+                        _isFailed = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 100,
               ),
