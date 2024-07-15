@@ -51,8 +51,7 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
   void initState() {
     super.initState();
     _lottieController = LottieAnimationController(
-      animationRangeSeconds: 6.0,
-      duration: const Duration(milliseconds: 1000),
+      animationLengthSeconds: 6.0,
       vsync: this,
     );
     _baseAnimationController = AnimationController(
@@ -137,6 +136,7 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
   Widget _interactiveLottie() {
     return MouseRegion(
       onEnter: (_) {
+        if (_isSending.value) return;
         _lottieController.pointLoop(
             animationList['hover']!['start']!, animationList['hover']!['end']!);
       },

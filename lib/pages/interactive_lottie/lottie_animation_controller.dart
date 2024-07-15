@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LottieAnimationController extends AnimationController {
-  /// [animationRangeSeconds]アニメーションの全体の長さ: 秒
+  /// [animationLengthSeconds]アニメーションの全体の長さ: 秒
   LottieAnimationController({
-    required this.animationRangeSeconds,
+    required this.animationLengthSeconds,
     required super.vsync,
     super.duration,
   });
-  final double animationRangeSeconds;
+  final double animationLengthSeconds;
 
   @override
   void dispose() {
@@ -24,8 +24,8 @@ class LottieAnimationController extends AnimationController {
   }) {
     if (startSecond < 0 ||
         startSecond >= endSecond ||
-        startSecond > animationRangeSeconds ||
-        endSecond > animationRangeSeconds) {
+        startSecond > animationLengthSeconds ||
+        endSecond > animationLengthSeconds) {
       throw ArgumentError('Invalid start or end value');
     }
 
@@ -33,17 +33,17 @@ class LottieAnimationController extends AnimationController {
 
     if (reverse) {
       repeat(
-          min: startSecond / animationRangeSeconds,
-          max: endSecond / animationRangeSeconds,
+          min: startSecond / animationLengthSeconds,
+          max: endSecond / animationLengthSeconds,
           reverse: true,
           period: Duration(seconds: (endSecond - startSecond).toInt()));
     } else {
-      value = startSecond / animationRangeSeconds;
-      animateTo(endSecond / animationRangeSeconds);
+      value = startSecond / animationLengthSeconds;
+      animateTo(endSecond / animationLengthSeconds);
       _listener = (status) {
         if (status == AnimationStatus.completed) {
-          value = startSecond / animationRangeSeconds;
-          animateTo(endSecond / animationRangeSeconds);
+          value = startSecond / animationLengthSeconds;
+          animateTo(endSecond / animationLengthSeconds);
         }
       };
     }
@@ -53,15 +53,15 @@ class LottieAnimationController extends AnimationController {
   Future<void> pointForward(double startSecond, double endSecond) async {
     if (startSecond < 0 ||
         startSecond >= endSecond ||
-        startSecond > animationRangeSeconds ||
-        endSecond > animationRangeSeconds) {
+        startSecond > animationLengthSeconds ||
+        endSecond > animationLengthSeconds) {
       throw ArgumentError('Invalid start or end value');
     }
 
     _removeCurrentListener();
 
-    value = startSecond / animationRangeSeconds;
-    return animateTo(endSecond / animationRangeSeconds);
+    value = startSecond / animationLengthSeconds;
+    return animateTo(endSecond / animationLengthSeconds);
   }
 
   void _removeCurrentListener() {
