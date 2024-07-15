@@ -22,11 +22,11 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
   bool _isFailed = false;
 
   final Map<String, Map<String, double>> animationList = {
+    'hover': const {'start': 0.0, 'end': 1.0},
     'send': const {'start': 1.0, 'end': 1.6},
-    'loop': const {'start': 0.0, 'end': 1.0},
-    'load': const {'start': 4.1, 'end': 6.0},
     'done': const {'start': 2.0, 'end': 3.0},
     'failed': const {'start': 3.1, 'end': 3.9},
+    'load': const {'start': 4.1, 'end': 6.0},
   };
 
   void _sendAnimation() async {
@@ -138,7 +138,7 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
     return MouseRegion(
       onEnter: (_) {
         _lottieController.pointLoop(
-            animationList['loop']!['start']!, animationList['loop']!['end']!);
+            animationList['hover']!['start']!, animationList['hover']!['end']!);
       },
       onExit: (_) {
         if (_isSending.value) return;
