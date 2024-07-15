@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui_playground_134/pages/interactive_lottie/interactive_lottie_example.dart';
 import 'package:ui_playground_134/pages/scaleup_nav/scaleup_nav_example.dart';
 import 'package:ui_playground_134/pages/deform_cloud/deform_cloud_example.dart';
 import 'package:ui_playground_134/pages/follow_path/follow_path_example.dart';
@@ -18,6 +19,15 @@ import 'package:ui_playground_134/pages/volume_controller/volume_controller_exam
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'interactive_lottie',
+    'page': const InteractiveLottieExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/interactive_lottie/interactive_lottie_example.dart',
+    ),
+    'date': DateTime(2024, 7, 15),
+    'thumbnail': 'interactive_lottie.webp',
+  },
   {
     'name': 'smooth_nav',
     'page': const SmoothNavExample(

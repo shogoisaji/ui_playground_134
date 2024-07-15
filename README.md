@@ -2,6 +2,14 @@
 <br/>
 <br/>
 
+## [🐖 Interactive Lottie](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/interactive_lottie/interactive_lottie_example.dart)
+
+### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/interactive_lottie)
+
+<img width="663" alt="interactive_lottie" src="https://github.com/user-attachments/assets/8a5da3d5-4623-40d5-8262-3cff0a3ece61">
+
+---
+
 ## [🐫 Smooth Nav](https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/smooth_nav/smooth_nav_example.dart)
 
 ### [🌐 Demo](https://shogoisaji.github.io/ui_playground_134/#/smooth_nav)
