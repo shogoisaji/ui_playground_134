@@ -108215,7 +108215,7 @@ A.aDx.prototype={
 $3(a,b,c){return this.a.UU()},
 $S:83}
 A.GL.prototype={
-an(){return new A.a5i(new A.c9(!1,$.aH()),A.aJ(["send",B.Rf,"loop",B.Rh,"load",B.Rg,"done",B.Ri,"failed",B.Re],t.N,t.V0),null,null,B.i)}}
+an(){return new A.a5i(new A.c9(!1,$.aH()),A.aJ(["hover",B.Rh,"send",B.Rf,"done",B.Ri,"failed",B.Re,"load",B.Rg],t.N,t.V0),null,null,B.i)}}
 A.a5i.prototype={
 nA(){var s=0,r=A.O(t.H),q=this,p,o,n,m
 var $async$nA=A.H(function(a,b){if(a===1)return A.L(b,r)
@@ -108311,9 +108311,9 @@ A.aE3.prototype={
 $1(a){var s,r=this.a,q=r.d
 q===$&&A.b()
 r=r.w
-s=r.i(0,"loop").i(0,"start")
+s=r.i(0,"hover").i(0,"start")
 s.toString
-r=r.i(0,"loop").i(0,"end")
+r=r.i(0,"hover").i(0,"end")
 r.toString
 q.a60(s,r)},
 $S:48}
