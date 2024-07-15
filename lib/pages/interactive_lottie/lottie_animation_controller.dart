@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LottieAnimationController extends AnimationController {
-  /// [animationLengthSeconds]アニメーションの全体の長さ: 秒
   LottieAnimationController({
-    required this.animationLengthSeconds,
     required super.vsync,
     super.duration,
   });
-  final double animationLengthSeconds;
 
   @override
   void dispose() {
@@ -22,10 +19,11 @@ class LottieAnimationController extends AnimationController {
     double endSecond, {
     bool reverse = false,
   }) {
-    if (startSecond < 0 ||
+    if (duration == null ||
+        startSecond < 0 ||
         startSecond >= endSecond ||
-        startSecond > animationLengthSeconds ||
-        endSecond > animationLengthSeconds) {
+        startSecond > duration!.inSeconds ||
+        endSecond > duration!.inSeconds) {
       throw ArgumentError('Invalid start or end value');
     }
 
@@ -33,17 +31,17 @@ class LottieAnimationController extends AnimationController {
 
     if (reverse) {
       repeat(
-          min: startSecond / animationLengthSeconds,
-          max: endSecond / animationLengthSeconds,
+          min: startSecond / duration!.inSeconds,
+          max: endSecond / duration!.inSeconds,
           reverse: true,
           period: Duration(seconds: (endSecond - startSecond).toInt()));
     } else {
-      value = startSecond / animationLengthSeconds;
-      animateTo(endSecond / animationLengthSeconds);
+      value = startSecond / duration!.inSeconds;
+      animateTo(endSecond / duration!.inSeconds);
       _listener = (status) {
         if (status == AnimationStatus.completed) {
-          value = startSecond / animationLengthSeconds;
-          animateTo(endSecond / animationLengthSeconds);
+          value = startSecond / duration!.inSeconds;
+          animateTo(endSecond / duration!.inSeconds);
         }
       };
     }
@@ -51,17 +49,18 @@ class LottieAnimationController extends AnimationController {
   }
 
   Future<void> pointForward(double startSecond, double endSecond) async {
-    if (startSecond < 0 ||
+    if (duration == null ||
+        startSecond < 0 ||
         startSecond >= endSecond ||
-        startSecond > animationLengthSeconds ||
-        endSecond > animationLengthSeconds) {
+        startSecond > duration!.inSeconds ||
+        endSecond > duration!.inSeconds) {
       throw ArgumentError('Invalid start or end value');
     }
 
     _removeCurrentListener();
 
-    value = startSecond / animationLengthSeconds;
-    return animateTo(endSecond / animationLengthSeconds);
+    value = startSecond / duration!.inSeconds;
+    return animateTo(endSecond / duration!.inSeconds);
   }
 
   void _removeCurrentListener() {

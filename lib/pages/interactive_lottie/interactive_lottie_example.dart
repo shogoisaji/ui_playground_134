@@ -51,7 +51,6 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
   void initState() {
     super.initState();
     _lottieController = LottieAnimationController(
-      animationLengthSeconds: 6.0,
       vsync: this,
     );
     _baseAnimationController = AnimationController(
@@ -153,6 +152,7 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
           'assets/lottie/send.json',
           controller: _lottieController,
           onLoaded: (composition) {
+            /// アニメーションの総時間を取得する
             _lottieController.duration = composition.duration;
           },
         ),
