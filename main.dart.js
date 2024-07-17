@@ -108326,8 +108326,9 @@ s===$&&A.b()
 s.sl(0,0)},
 $S:36}
 A.aE2.prototype={
-$0(){var s=this.a
-s.f.sl(0,!0)
+$0(){var s=this.a,r=s.f
+if(r.a)return
+r.sl(0,!0)
 s.nA()},
 $S:0}
 A.aE1.prototype={
