@@ -145,6 +145,7 @@ class _InteractiveLottieExampleState extends State<InteractiveLottieExample>
       },
       child: GestureDetector(
         onTap: () {
+          if (_isSending.value) return;
           _isSending.value = true;
           _sendAnimation();
         },
