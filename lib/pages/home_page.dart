@@ -189,7 +189,15 @@ class _HomePageState extends State<HomePage> {
                                                         fit: BoxFit.cover,
                                                         errorBuilder: (context,
                                                             error, stack) {
-                                                          return _errorImage();
+                                                          return Image.asset(
+                                                            'assets/thumbnails/${pages[index]['name']}.png',
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stack) {
+                                                              return _errorImage();
+                                                            },
+                                                          );
                                                         },
                                                       )
                                                     : Image.asset(
