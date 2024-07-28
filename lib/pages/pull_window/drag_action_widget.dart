@@ -64,15 +64,6 @@ class _DragActionWidgetState extends State<DragActionWidget>
         _angle = nextAngle.clamp(widget.initialAngle, 0);
       }
     });
-    if (_distance < widget.intoArea) {
-      setState(() {
-        _isIntoArea = true;
-      });
-    } else {
-      setState(() {
-        _isIntoArea = false;
-      });
-    }
   }
 
   void _backInitialPosition() {
@@ -129,6 +120,11 @@ class _DragActionWidgetState extends State<DragActionWidget>
         _position.dy + details.delta.dy,
       );
       _distance = (widget.targetPosition - _position).distance;
+      if (_distance < widget.intoArea) {
+        _isIntoArea = true;
+      } else {
+        _isIntoArea = false;
+      }
     });
     _updateAngle();
     _overlay?.markNeedsBuild();
