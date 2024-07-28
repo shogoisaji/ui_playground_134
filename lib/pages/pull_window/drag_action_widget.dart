@@ -57,13 +57,11 @@ class _DragActionWidgetState extends State<DragActionWidget>
 
   void _updateAngle() {
     final nextAngle = widget.initialAngle * (_distance / _initialDistance);
-    setState(() {
-      if (widget.initialAngle > 0) {
-        _angle = nextAngle.clamp(0, widget.initialAngle);
-      } else {
-        _angle = nextAngle.clamp(widget.initialAngle, 0);
-      }
-    });
+    if (widget.initialAngle > 0) {
+      _angle = nextAngle.clamp(0, widget.initialAngle);
+    } else {
+      _angle = nextAngle.clamp(widget.initialAngle, 0);
+    }
   }
 
   void _backInitialPosition() {
@@ -73,6 +71,11 @@ class _DragActionWidgetState extends State<DragActionWidget>
     );
     controller.reset();
     controller.forward();
+  }
+
+  void _removeOverlay() {
+    _overlay?.remove();
+    _overlay = null;
   }
 
   void _handlePanStart() {
@@ -108,11 +111,6 @@ class _DragActionWidgetState extends State<DragActionWidget>
     Overlay.of(context).insert(_overlay!);
   }
 
-  void _dragEnd() {
-    _overlay?.remove();
-    _overlay = null;
-  }
-
   void _handlePanUpdate(DragUpdateDetails details) {
     setState(() {
       _position = Offset(
@@ -120,11 +118,7 @@ class _DragActionWidgetState extends State<DragActionWidget>
         _position.dy + details.delta.dy,
       );
       _distance = (widget.targetPosition - _position).distance;
-      if (_distance < widget.intoArea) {
-        _isIntoArea = true;
-      } else {
-        _isIntoArea = false;
-      }
+      _isIntoArea = _distance < widget.intoArea;
     });
     _updateAngle();
     _overlay?.markNeedsBuild();
@@ -138,10 +132,11 @@ class _DragActionWidgetState extends State<DragActionWidget>
       _setAnimation(_position, widget.initialPosition);
     }
     controller.reset();
-    await controller.forward();
-    _dragEnd();
-    setState(() {
-      _isDragging = false;
+    controller.forward().then((_) {
+      _removeOverlay();
+      setState(() {
+        _isDragging = false;
+      });
     });
   }
 
@@ -170,6 +165,7 @@ class _DragActionWidgetState extends State<DragActionWidget>
   @override
   void dispose() {
     controller.dispose();
+    _removeOverlay();
     super.dispose();
   }
 

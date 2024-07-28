@@ -176,7 +176,7 @@ class _PullWindowExampleState extends State<PullWindowExample> {
             height: cardSize.height,
             initialPosition: const Offset(50, 400),
             targetPosition: targetPosition,
-            intoArea: acceptArea * 1.5,
+            intoArea: acceptArea,
             initialAngle: 0.2,
             isAccepted: _currentIndex == 2,
             onAccepted: () {
