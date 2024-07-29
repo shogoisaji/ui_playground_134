@@ -6,6 +6,7 @@ class DragActionWidget extends StatefulWidget {
   final Offset targetPosition;
   final double intoAreaOffset;
   final VoidCallback onAccepted;
+  final VoidCallback onSelfDetach;
   final bool isAccepted;
   const DragActionWidget(
       {super.key,
@@ -13,6 +14,7 @@ class DragActionWidget extends StatefulWidget {
       required this.targetPosition,
       required this.intoAreaOffset,
       required this.isAccepted,
+      required this.onSelfDetach,
       required this.onAccepted});
 
   @override
@@ -31,6 +33,7 @@ class _DragActionWidgetState extends State<DragActionWidget>
   OverlayEntry? _overlay;
   bool _isIntoArea = false;
   bool _isDragging = false;
+  bool _isSelfDetached = false;
   double _progress = 0;
 
   void _removeOverlay() {
@@ -140,6 +143,7 @@ class _DragActionWidgetState extends State<DragActionWidget>
   }
 
   void _handlePanStart() {
+    _isSelfDetached = false;
     _addOverlay();
     setState(() {
       _isDragging = true;
@@ -164,8 +168,19 @@ class _DragActionWidgetState extends State<DragActionWidget>
         _isDragging = false;
       });
     });
+
+    /// 範囲内でドラッグを修了した場合
     if (_isIntoArea) {
       widget.onAccepted();
+      return;
+    }
+
+    /// 範囲外でドラッグを修了した場合 & 自分がacceptしている場合
+    if (widget.isAccepted && !_isIntoArea) {
+      _isSelfDetached = true;
+      widget.onSelfDetach();
+    } else {
+      _isSelfDetached = false;
     }
   }
 
@@ -209,7 +224,10 @@ class _DragActionWidgetState extends State<DragActionWidget>
   void didUpdateWidget(DragActionWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isAccepted != oldWidget.isAccepted && !widget.isAccepted) {
-      _backInitialPosition();
+      /// 外部から除外された場合
+      if (!_isSelfDetached) {
+        _backInitialPosition();
+      }
     }
   }
 

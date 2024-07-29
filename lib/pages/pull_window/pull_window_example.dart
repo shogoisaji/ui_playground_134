@@ -159,6 +159,11 @@ class _PullWindowExampleState extends State<PullWindowExample> {
                 _currentIndex = 0;
               });
             },
+            onSelfDetach: () {
+              setState(() {
+                _currentIndex = null;
+              });
+            },
           ),
           DragActionWidget(
             cardModel: cardModels[1],
@@ -170,6 +175,11 @@ class _PullWindowExampleState extends State<PullWindowExample> {
                 _currentIndex = 1;
               });
             },
+            onSelfDetach: () {
+              setState(() {
+                _currentIndex = null;
+              });
+            },
           ),
           DragActionWidget(
             cardModel: cardModels[2],
@@ -179,6 +189,11 @@ class _PullWindowExampleState extends State<PullWindowExample> {
             onAccepted: () {
               setState(() {
                 _currentIndex = 2;
+              });
+            },
+            onSelfDetach: () {
+              setState(() {
+                _currentIndex = null;
               });
             },
           ),
