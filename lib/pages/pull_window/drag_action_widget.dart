@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:ui_playground_134/pages/pull_window/card_model.dart';
 
 class DragActionWidget extends StatefulWidget {
-  final Widget initialWidget;
-  final Widget appliedWidget;
-  final double width;
-  final double height;
-  final Offset initialPosition;
+  final CardModel cardModel;
   final Offset targetPosition;
-  final double intoArea;
-  final double initialAngle;
-  final Color bgColor;
-  final bool isAccepted;
+  final double intoAreaOffset;
   final VoidCallback onAccepted;
+  final bool isAccepted;
   const DragActionWidget(
       {super.key,
-      required this.initialWidget,
-      required this.appliedWidget,
-      required this.width,
-      required this.height,
-      required this.initialPosition,
+      required this.cardModel,
       required this.targetPosition,
-      required this.intoArea,
-      required this.initialAngle,
-      this.bgColor = Colors.grey,
+      required this.intoAreaOffset,
       required this.isAccepted,
       required this.onAccepted});
 
@@ -32,139 +21,186 @@ class DragActionWidget extends StatefulWidget {
 
 class _DragActionWidgetState extends State<DragActionWidget>
     with SingleTickerProviderStateMixin {
-  late AnimationController controller;
-  late Animation<Offset> positionAnimation;
+  late AnimationController _animationController;
+  late Animation<Offset> _positionAnimation;
+
+  late CardModel _cardModel;
+  late double _currentWidth;
+  late double _currentHeight;
 
   OverlayEntry? _overlay;
-
-  double _distance = 0;
-  double _angle = 0.0;
-  double _initialDistance = 0;
-
   bool _isIntoArea = false;
   bool _isDragging = false;
-
-  late Offset _position;
-
-  void _setAnimation(Offset start, Offset end) {
-    positionAnimation = Tween<Offset>(begin: start, end: end).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: Curves.easeOutBack,
-      ),
-    );
-  }
-
-  void _updateAngle() {
-    final nextAngle = widget.initialAngle * (_distance / _initialDistance);
-    if (widget.initialAngle > 0) {
-      _angle = nextAngle.clamp(0, widget.initialAngle);
-    } else {
-      _angle = nextAngle.clamp(widget.initialAngle, 0);
-    }
-  }
-
-  void _backInitialPosition() {
-    _setAnimation(
-      _position,
-      widget.initialPosition,
-    );
-    controller.reset();
-    controller.forward();
-  }
+  double _progress = 0;
 
   void _removeOverlay() {
     _overlay?.remove();
     _overlay = null;
   }
 
-  void _handlePanStart() {
-    setState(() {
-      _isDragging = true;
-    });
+  void _updateParameter(Offset position) {
+    /// 初期位置からの距離(initStateで取得すると数値がズレる)
+    final initialDistance =
+        (widget.targetPosition - widget.cardModel.initialPosition).distance;
+
+    /// 現在位置からの距離
+    final distance = (position - widget.targetPosition).distance;
+
+    /// 距離による進捗率 近くが"1" 遠いほど"0"
+    _progress = (1 - distance / initialDistance).clamp(0, 1);
+
+    /// 角度
+    final angle = _cardModel.initialAngle * (1 - _progress);
+
+    /// positionがtargetPositionの周囲intoAreaOffset内かどうか
+    _isIntoArea = distance < widget.intoAreaOffset;
+
+    /// 現在のcardのサイズを更新
+    _currentWidth = widget.cardModel.beforeWidth +
+        (widget.cardModel.afterWidth - widget.cardModel.beforeWidth) *
+            _progress;
+    _currentHeight = widget.cardModel.beforeHeight +
+        (widget.cardModel.afterHeight - widget.cardModel.beforeHeight) *
+            _progress;
+
+    /// 値の更新
+    _cardModel = _cardModel.copyWith(
+      position: position,
+      distance: distance,
+      currentAngle: angle,
+    );
+  }
+
+  void _setAnimation() {
+    final positionEnd = switch (_isIntoArea) {
+      true => widget.targetPosition,
+      false => _cardModel.initialPosition,
+    };
+
+    _positionAnimation =
+        Tween<Offset>(begin: _cardModel.position, end: positionEnd).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutBack,
+      ),
+    );
+  }
+
+  void _backInitialPosition() {
+    _cardModel = _cardModel.copyWith(
+      position: _cardModel.initialPosition,
+    );
+    _positionAnimation = Tween<Offset>(
+            begin: widget.targetPosition, end: _cardModel.initialPosition)
+        .animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutBack,
+      ),
+    );
+    _animationController.reset();
+    _animationController.forward();
+  }
+
+  void _addOverlay() {
     final double topPadding = MediaQuery.of(context).padding.top;
     final double appBarHeight = AppBar().preferredSize.height;
-    _overlay = OverlayEntry(
-      builder: (context) {
-        return AnimatedBuilder(
-          animation: positionAnimation,
-          builder: (context, child) {
-            return Positioned(
-              top: _position.dy -
-                  widget.height / 2 +
-                  (topPadding + appBarHeight),
-              left: _position.dx - widget.width / 2,
-              child: Transform.rotate(
-                angle: _angle,
-                child: Material(
-                  color: Colors.transparent,
-                  child: _cardWidget(
-                    _isIntoArea ? widget.appliedWidget : widget.initialWidget,
+
+    OverlayEntry createOverlayEntry() {
+      return OverlayEntry(
+        builder: (context) {
+          return AnimatedBuilder(
+              animation: _positionAnimation,
+              builder: (context, child) {
+                return Positioned(
+                  top: _cardModel.position!.dy -
+                      _currentHeight / 2 +
+                      (topPadding + appBarHeight),
+                  left: _cardModel.position!.dx - _currentWidth / 2,
+                  child: Transform.rotate(
+                    angle: _cardModel.currentAngle ?? 0.0,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: _cardWidget(
+                        _cardModel,
+                        _progress,
+                        _currentWidth,
+                        _currentHeight,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
+                );
+              });
+        },
+      );
+    }
+
+    _overlay = createOverlayEntry();
     Overlay.of(context).insert(_overlay!);
   }
 
-  void _handlePanUpdate(DragUpdateDetails details) {
+  void _handlePanStart() {
+    _addOverlay();
     setState(() {
-      _position = Offset(
-        _position.dx + details.delta.dx,
-        _position.dy + details.delta.dy,
-      );
-      _distance = (widget.targetPosition - _position).distance;
-      _isIntoArea = _distance < widget.intoArea;
+      _isDragging = true;
     });
-    _updateAngle();
+  }
+
+  void _handlePanUpdate(DragUpdateDetails details) {
+    final position = Offset(
+      _cardModel.position!.dx + details.delta.dx,
+      _cardModel.position!.dy + details.delta.dy,
+    );
+    _updateParameter(position);
     _overlay?.markNeedsBuild();
   }
 
-  void _handlePanEnd(DragEndDetails details) async {
-    if (_isIntoArea) {
-      widget.onAccepted();
-      _setAnimation(_position, widget.targetPosition);
-    } else {
-      _setAnimation(_position, widget.initialPosition);
-    }
-    controller.reset();
-    controller.forward().then((_) {
+  void _handlePanEnd(_) async {
+    _setAnimation();
+    _animationController.reset();
+    _animationController.forward().then((_) {
       _removeOverlay();
       setState(() {
         _isDragging = false;
       });
     });
+    if (_isIntoArea) {
+      widget.onAccepted();
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    _position = widget.initialPosition;
-    controller = AnimationController(
+    _currentWidth = widget.cardModel.beforeWidth;
+    _currentHeight = widget.cardModel.beforeHeight;
+    _cardModel = widget.cardModel.copyWith(
+      currentAngle: widget.cardModel.initialAngle,
+      position: widget.cardModel.initialPosition,
+    );
+    _animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    controller.addListener(() {
-      setState(() {
-        _position = positionAnimation.value;
-      });
-      _distance = (widget.targetPosition - _position).distance;
-      _updateAngle();
+    _positionAnimation = Tween<Offset>(
+      begin: _cardModel.position,
+      end: widget.targetPosition,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutBack,
+      ),
+    );
+    _animationController.addListener(() {
+      _updateParameter(_positionAnimation.value);
+      _overlay?.markNeedsBuild();
+      setState(() {});
     });
-    _initialDistance =
-        (widget.targetPosition - widget.initialPosition).distance;
-    _distance = (widget.targetPosition - _position).distance;
-    _setAnimation(widget.initialPosition, widget.targetPosition);
-    _updateAngle();
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    _animationController.dispose();
     _removeOverlay();
     super.dispose();
   }
@@ -182,8 +218,8 @@ class _DragActionWidgetState extends State<DragActionWidget>
     return Stack(
       children: [
         Positioned(
-          top: _position.dy - widget.height / 2,
-          left: _position.dx - widget.width / 2,
+          top: _cardModel.position!.dy - _currentHeight / 2,
+          left: _cardModel.position!.dx - _currentWidth / 2,
           child: GestureDetector(
             onPanStart: (details) {
               _handlePanStart();
@@ -195,15 +231,11 @@ class _DragActionWidgetState extends State<DragActionWidget>
               _handlePanEnd(details);
             },
             child: Transform.rotate(
-              angle: _angle,
+              angle: _cardModel.currentAngle ?? 0.0,
               child: Opacity(
-                opacity: _isDragging ? 0 : 1,
-                child: _cardWidget(
-                  widget.isAccepted
-                      ? widget.appliedWidget
-                      : widget.initialWidget,
-                ),
-              ),
+                  opacity: _isDragging ? 0.0 : 1.0,
+                  child: _cardWidget(
+                      _cardModel, _progress, _currentWidth, _currentHeight)),
             ),
           ),
         ),
@@ -211,15 +243,24 @@ class _DragActionWidgetState extends State<DragActionWidget>
     );
   }
 
-  Widget _cardWidget(Widget child) {
+  Widget _cardWidget(
+      CardModel cardModel, double progress, double width, double height) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
-        color: widget.bgColor,
+        color: Colors.red.shade400,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: child,
+      child: Stack(
+        children: [
+          cardModel.beforeChild,
+          Opacity(
+            opacity: progress.clamp(0, 1),
+            child: cardModel.afterChild,
+          ),
+        ],
+      ),
     );
   }
 }

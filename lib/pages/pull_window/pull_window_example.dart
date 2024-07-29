@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ui_playground_134/pages/pull_window/card_model.dart';
 import 'package:ui_playground_134/pages/pull_window/drag_action_widget.dart';
 import 'package:ui_playground_134/utils/open_link.dart';
 
@@ -19,6 +20,72 @@ class _PullWindowExampleState extends State<PullWindowExample> {
 
   int? _currentIndex;
 
+  final List<CardModel> cardModels = [
+    CardModel(
+      beforeChild: const Center(
+        child: Text('0',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+      ),
+      afterChild: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        width: double.infinity,
+        height: double.infinity,
+      ),
+      beforeWidth: cardSize.width,
+      beforeHeight: cardSize.height,
+      afterWidth: cardSize.width * 3,
+      afterHeight: cardSize.height * 2,
+      initialPosition: const Offset(120, 200),
+      initialAngle: -0.4,
+    ),
+    CardModel(
+      beforeChild: const Center(
+        child: Text(
+          '1',
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ),
+      ),
+      afterChild: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          'assets/images/sky.jpg',
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+      ),
+      beforeWidth: cardSize.width,
+      beforeHeight: cardSize.height,
+      afterWidth: cardSize.width * 1.5,
+      afterHeight: cardSize.height * 1.5,
+      initialPosition: const Offset(390, 600),
+      initialAngle: 0.2,
+    ),
+    CardModel(
+      beforeChild: const Center(
+        child: Text('2',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+      ),
+      afterChild: Container(
+        decoration: BoxDecoration(
+          color: Colors.yellow,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        width: double.infinity,
+        height: double.infinity,
+      ),
+      beforeWidth: cardSize.width * 0.6,
+      beforeHeight: cardSize.height * 0.6,
+      afterWidth: cardSize.width,
+      afterHeight: cardSize.height,
+      initialPosition: const Offset(30, 500),
+      initialAngle: 0.7,
+    ),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +100,7 @@ class _PullWindowExampleState extends State<PullWindowExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.grey.shade700,
       appBar: AppBar(
         actions: [
           IconButton(
@@ -83,34 +150,9 @@ class _PullWindowExampleState extends State<PullWindowExample> {
             ),
           ),
           DragActionWidget(
-            initialWidget: const ColoredBox(
-              color: Colors.brown,
-              child: Center(
-                child: Text(
-                  '0',
-                  style: TextStyle(color: Colors.white, fontSize: 32),
-                ),
-              ),
-            ),
-            appliedWidget: Container(
-                width: cardSize.width,
-                height: cardSize.height,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(
-                  child: Text(
-                    '"0"',
-                    style: TextStyle(color: Colors.white, fontSize: 32),
-                  ),
-                )),
-            width: cardSize.width,
-            height: cardSize.height,
-            initialPosition: const Offset(20, 90),
+            cardModel: cardModels[0],
             targetPosition: targetPosition,
-            intoArea: acceptArea,
-            initialAngle: -0.4,
+            intoAreaOffset: acceptArea,
             isAccepted: _currentIndex == 0,
             onAccepted: () {
               setState(() {
@@ -119,24 +161,9 @@ class _PullWindowExampleState extends State<PullWindowExample> {
             },
           ),
           DragActionWidget(
-            initialWidget: const Center(
-              child: Text(
-                '1',
-                style: TextStyle(color: Colors.white, fontSize: 32),
-              ),
-            ),
-            appliedWidget: const Center(
-              child: Text(
-                '"1"',
-                style: TextStyle(color: Colors.pink, fontSize: 32),
-              ),
-            ),
-            width: cardSize.width,
-            height: cardSize.height,
-            initialPosition: const Offset(310, 50),
+            cardModel: cardModels[1],
             targetPosition: targetPosition,
-            intoArea: acceptArea,
-            initialAngle: 0.4,
+            intoAreaOffset: acceptArea,
             isAccepted: _currentIndex == 1,
             onAccepted: () {
               setState(() {
@@ -145,39 +172,9 @@ class _PullWindowExampleState extends State<PullWindowExample> {
             },
           ),
           DragActionWidget(
-            initialWidget: Container(
-                width: cardSize.width,
-                height: cardSize.height,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(
-                  child: Text(
-                    '2',
-                    style: TextStyle(color: Colors.white, fontSize: 32),
-                  ),
-                )),
-            appliedWidget: Container(
-              width: cardSize.width,
-              height: cardSize.height,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  '"2"',
-                  style: TextStyle(color: Colors.white, fontSize: 32),
-                ),
-              ),
-            ),
-            width: cardSize.width,
-            height: cardSize.height,
-            initialPosition: const Offset(50, 400),
+            cardModel: cardModels[2],
             targetPosition: targetPosition,
-            intoArea: acceptArea,
-            initialAngle: 0.2,
+            intoAreaOffset: acceptArea,
             isAccepted: _currentIndex == 2,
             onAccepted: () {
               setState(() {
