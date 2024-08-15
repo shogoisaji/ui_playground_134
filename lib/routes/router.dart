@@ -17,10 +17,20 @@ import 'package:ui_playground_134/pages/smooth_nav/smooth_nav_example.dart';
 import 'package:ui_playground_134/pages/spin_overlay/spin_overlay_example.dart';
 
 import 'package:ui_playground_134/pages/stripe_animation/stripe_animation_example.dart';
+import 'package:ui_playground_134/pages/time_selector/time_selector_example.dart';
 import 'package:ui_playground_134/pages/volume_controller/volume_controller_example.dart';
 
 // 新しいpageを追加する場合は、pagesリストにMapを追加する
 List<Map<String, dynamic>> pages = [
+  {
+    'name': 'time_selector',
+    'page': const TimeSelectorExample(
+      githubUrl:
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/pull_window/pull_window_example.dart',
+    ),
+    'date': DateTime(2024, 8, 15),
+    'thumbnail': 'stock_object.webp',
+  },
   {
     'name': 'pull_window',
     'page': const PullWindowExample(
