@@ -24,7 +24,8 @@ class _TimeSelectorExampleState extends State<TimeSelectorExample> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$_hour:$_minute',
+            Text(
+                '${_hour.toString().padLeft(2, '0')}:${_minute.toString().padLeft(2, '0')}',
                 style: TextStyle(color: Colors.grey.shade100, fontSize: 32)),
             ElevatedButton(
               onPressed: () async {

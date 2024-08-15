@@ -4,9 +4,6 @@ class VerticalTimeSelector {
   int _hour = 0;
   int _minute = 0;
 
-  int get hour => _hour;
-  int get minute => _minute;
-
   Future<(int, int)?> show(BuildContext context) async {
     final result = await showDialog<(int, int)>(
         context: context,
@@ -14,7 +11,7 @@ class VerticalTimeSelector {
           final width = MediaQuery.of(context).size.width;
 
           final double contentHeight =
-              (width * 0.7).clamp(100, MediaQuery.sizeOf(context).height * 0.8);
+              (width * 0.7).clamp(100, MediaQuery.sizeOf(context).height * 0.7);
           return StatefulBuilder(builder: (context, setDialogState) {
             return Dialog(
               backgroundColor: Colors.grey.shade800,
@@ -188,7 +185,7 @@ class TimeIndicatorPainter extends CustomPainter {
 
     final textPainter = TextPainter(
       text: TextSpan(
-        text: value.toString().padLeft(2, '  '),
+        text: value.toString().padLeft(2, '0'),
         style: TextStyle(fontSize: textSize, color: color),
       ),
       textDirection: TextDirection.ltr,
