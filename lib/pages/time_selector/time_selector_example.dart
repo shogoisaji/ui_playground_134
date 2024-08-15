@@ -40,7 +40,8 @@ class _TimeSelectorExampleState extends State<TimeSelectorExample> {
                 style: TextStyle(color: Colors.grey.shade100, fontSize: 32)),
             ElevatedButton(
               onPressed: () async {
-                final result = await _timeSelector.show(context);
+                final result =
+                    await _timeSelector.show(context, _hour, _minute);
                 if (result != null) {
                   setState(() {
                     _hour = result.$1;

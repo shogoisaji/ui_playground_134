@@ -4,7 +4,10 @@ class VerticalTimeSelector {
   int _hour = 0;
   int _minute = 0;
 
-  Future<(int, int)?> show(BuildContext context) async {
+  Future<(int, int)?> show(
+      BuildContext context, int initialHour, int initialMinute) async {
+    _hour = initialHour;
+    _minute = initialMinute;
     final result = await showDialog<(int, int)>(
         context: context,
         builder: (context) {
