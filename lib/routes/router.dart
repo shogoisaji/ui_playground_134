@@ -26,7 +26,7 @@ List<Map<String, dynamic>> pages = [
     'name': 'time_selector',
     'page': const TimeSelectorExample(
       githubUrl:
-          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/pull_window/pull_window_example.dart',
+          'https://github.com/shogoisaji/ui_playground_134/blob/main/lib/pages/time_selector/time_selector_example.dart',
     ),
     'date': DateTime(2024, 8, 15),
     'thumbnail': 'stock_object.webp',
